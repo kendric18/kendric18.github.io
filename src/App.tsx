@@ -248,6 +248,9 @@ function About() {
             <p style={{ fontFamily: "Georgia, serif", fontSize: 14, color: C.muted, lineHeight: 1.8, margin: "0 0 12px" }}>
               Started with a screwdriver and a saw. Then Interior Design at NAFA, EEE at SP — and now Design & AI at SUTD. Every pivot taught me to think across disciplines.
             </p>
+            <p style={{ fontFamily: "Georgia, serif", fontSize: 14, color: C.muted, lineHeight: 1.8, margin: "0 0 12px" }}>
+              Design & AI undergraduate at SUTD, bridging human-centered design with engineering. Skilled in product design, CAD modelling, and hardware prototyping. Passionate about using AI to build meaningful, people-first products. Aspiring entrepreneur with a builder's mindset, focused on creating things that genuinely improve lives.
+            </p>
             <p style={{ fontFamily: "Georgia, serif", fontSize: 14, color: C.muted, lineHeight: 1.8, margin: 0 }}>
               BSc Design and AI (DAI) at SUTD | VP of Scratch Club | Customer Success at Edgeline Planners
             </p>
