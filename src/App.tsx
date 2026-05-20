@@ -1,6 +1,7 @@
 import { useState, useEffect } from "react"
 import type { CSSProperties, ReactNode } from "react"
 import { motion, AnimatePresence } from "framer-motion"
+import { ShaderAnimation } from "./ShaderAnimation"
 
 const C = {
   bg: "#F5F5F0",
@@ -262,74 +263,78 @@ function Hero() {
         position: "relative",
       }}
     >
-      <motion.div
-        initial={{ opacity: 0, scale: 0.85 }}
-        animate={{ opacity: 1, scale: 1 }}
-        transition={{ delay: 0.2, duration: 0.5, ease: "backOut" }}
-        style={{
-          width: 110,
-          height: 150,
-          borderRadius: 9999,
-          overflow: "hidden",
-          border: `3px solid ${C.bg}`,
-          boxShadow: "0 8px 32px rgba(0,0,0,0.18)",
-          marginBottom: 28,
-        }}
-      >
-        <img
-          src={PHOTO_URL}
-          alt="Kendric"
+      <ShaderAnimation />
+
+      <div style={{ position: "relative", zIndex: 1, display: "flex", flexDirection: "column", alignItems: "center" }}>
+        <motion.div
+          initial={{ opacity: 0, scale: 0.85 }}
+          animate={{ opacity: 1, scale: 1 }}
+          transition={{ delay: 0.2, duration: 0.5, ease: "backOut" }}
           style={{
-            width: "100%",
-            height: "100%",
-            objectFit: "cover",
-            objectPosition: "center 15%",
-            display: "block",
+            width: 110,
+            height: 150,
+            borderRadius: 9999,
+            overflow: "hidden",
+            border: `3px solid ${C.bg}`,
+            boxShadow: "0 8px 32px rgba(0,0,0,0.18)",
+            marginBottom: 28,
           }}
-        />
-      </motion.div>
+        >
+          <img
+            src={PHOTO_URL}
+            alt="Kendric"
+            style={{
+              width: "100%",
+              height: "100%",
+              objectFit: "cover",
+              objectPosition: "center 15%",
+              display: "block",
+            }}
+          />
+        </motion.div>
 
-      <h1
-        style={{
-          fontFamily: "'Arial Black', 'Helvetica Neue', sans-serif",
-          fontWeight: 900,
-          fontSize: "clamp(64px, 14vw, 148px)",
-          color: C.accent,
-          letterSpacing: "-4px",
-          lineHeight: 0.9,
-          textTransform: "uppercase",
-          userSelect: "none",
-          margin: 0,
-          textAlign: "center",
-        }}
-      >
-        <BlurText text="KENDRIC" />
-      </h1>
+        <h1
+          style={{
+            fontFamily: "'Arial Black', 'Helvetica Neue', sans-serif",
+            fontWeight: 900,
+            fontSize: "clamp(64px, 14vw, 148px)",
+            color: C.accent,
+            letterSpacing: "-4px",
+            lineHeight: 0.9,
+            textTransform: "uppercase",
+            userSelect: "none",
+            margin: 0,
+            textAlign: "center",
+          }}
+        >
+          <BlurText text="KENDRIC" />
+        </h1>
 
-      <motion.p
-        initial={{ opacity: 0 }}
-        animate={{ opacity: 1 }}
-        transition={{ delay: 1, duration: 0.6 }}
-        style={{
-          marginTop: 36,
-          fontFamily: "Georgia, serif",
-          fontStyle: "italic",
-          fontSize: 15,
-          color: "#555",
-          letterSpacing: "0.3px",
-          textAlign: "center",
-        }}
-      >
-        Designing human experiences in code.
-      </motion.p>
+        <motion.p
+          initial={{ opacity: 0 }}
+          animate={{ opacity: 1 }}
+          transition={{ delay: 1, duration: 0.6 }}
+          style={{
+            marginTop: 36,
+            fontFamily: "Georgia, serif",
+            fontStyle: "italic",
+            fontSize: 15,
+            color: "#555",
+            letterSpacing: "0.3px",
+            textAlign: "center",
+          }}
+        >
+          Designing human experiences in code.
+        </motion.p>
 
-      <motion.div
-        animate={{ y: bounce ? 6 : 0 }}
-        transition={{ duration: 0.6, ease: "easeInOut" }}
-        style={{ marginTop: 20, color: "#aaa", fontSize: 22, lineHeight: 1 }}
-      >
-        ⌄
-      </motion.div>
+        <motion.div
+          animate={{ y: bounce ? 6 : 0 }}
+          transition={{ duration: 0.6, ease: "easeInOut" }}
+          style={{ marginTop: 20, color: "#aaa", fontSize: 22, lineHeight: 1 }}
+        >
+          ⌄
+        </motion.div>
+      </div>
     </section>
   )
 }
