@@ -1,3 +1,48 @@
+@import "tailwindcss";
+
+@keyframes fade-spin {
+  from { opacity: 1; }
+  to { opacity: 0.15; }
+}
+
+@theme inline {
+  --color-gray-100: var(--ds-gray-100);
+  --color-gray-400: var(--ds-gray-400);
+  --color-gray-700: var(--ds-gray-700);
+  --color-gray-1000: var(--ds-gray-1000);
+  --color-gray-1000-h: var(--ds-gray-1000-h);
+  --color-gray-alpha-200: var(--ds-gray-alpha-200);
+  --color-gray-alpha-400: var(--ds-gray-alpha-400);
+  --color-background-100: var(--ds-background-100);
+  --shadow-focus-ring: var(--ds-focus-ring);
+  --shadow-border-small: var(--ds-shadow-border-small);
+  --animate-fade-spin: fade-spin 1.2s linear infinite;
+}
+
+@layer utilities {
+  .hide-scrollbar {
+    -ms-overflow-style: none;
+    scrollbar-width: none;
+  }
+  .hide-scrollbar::-webkit-scrollbar {
+    display: none;
+  }
+}
+
+:root {
+  --ds-gray-100: hsla(0, 0%, 95%, 1);
+  --ds-gray-400: hsla(0, 0%, 92%, 1);
+  --ds-gray-700: hsla(0, 0%, 56%, 1);
+  --ds-gray-1000: hsla(0, 0%, 9%, 1);
+  --ds-gray-1000-h: hsl(0, 0%, 22%);
+  --ds-gray-alpha-200: hsla(0, 0%, 0%, 0.08);
+  --ds-gray-alpha-400: hsla(0, 0%, 0%, 0.08);
+  --ds-background-100: hsla(0, 0%, 100%, 1);
+  --ds-focus-color: #0070f3;
+  --ds-focus-ring: 0 0 0 2px var(--ds-background-100), 0 0 0 4px var(--ds-focus-color);
+  --ds-shadow-border-small: 0 0 0 1px rgba(0, 0, 0, 0.08);
+}
+
 *, *::before, *::after {
   box-sizing: border-box;
 }

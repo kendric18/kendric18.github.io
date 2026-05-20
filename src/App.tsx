@@ -2,6 +2,7 @@ import { useState, useEffect, useContext, createContext } from "react"
 import type { CSSProperties, ReactNode } from "react"
 import { motion, AnimatePresence } from "framer-motion"
 import { ShaderAnimation } from "./ShaderAnimation"
+import { Scroller } from "@/components/ui/scroller-1"
 
 // ─── COLOUR TOKENS ────────────────────────────────────────────────────────────
 const LIGHT = {
@@ -40,10 +41,10 @@ const useTheme = () => useContext(ThemeContext)
 const PHOTO_URL = "/kendric.jpg"
 
 const PROJECTS = [
-  { id: "lifty", category: "Product Design · Hardware", title: "Lifty", subtitle: "SUTD × LionsBot International", image: "" },
-  { id: "project-2", category: "UX / AI", title: "Project 2", subtitle: "SUTD studio project", image: "" },
-  { id: "project-3", category: "Design Systems", title: "Project 3", subtitle: "SUTD studio project", image: "" },
-  { id: "project-4", category: "Research", title: "Project 4", subtitle: "SUTD studio project", image: "" },
+  { id: "lifty", category: "Product Design · Hardware", title: "Lifty", subtitle: "SUTD × LionsBot International", image: "https://images.unsplash.com/photo-1485827404703-89b55fcc595e?w=600&q=80", link: "#" },
+  { id: "project-2", category: "UX / AI", title: "Project 2", subtitle: "SUTD studio project", image: "https://images.unsplash.com/photo-1555421689-3f034debb73a?w=600&q=80", link: "#" },
+  { id: "project-3", category: "Design Systems", title: "Project 3", subtitle: "SUTD studio project", image: "https://images.unsplash.com/photo-1561070791-2526d30994b5?w=600&q=80", link: "#" },
+  { id: "project-4", category: "Research", title: "Project 4", subtitle: "SUTD studio project", image: "https://images.unsplash.com/photo-1517048676732-d65bc937f952?w=600&q=80", link: "#" },
 ]
 
 const SKILLS = ["Product Design", "UX Research", "Figma / Framer", "Python / C++", "CAD / Fusion 360", "AutoCAD", "Electronics / Arduino", "AI / ML"]
@@ -273,14 +274,18 @@ function ProjectCard({ project }: { project: (typeof PROJECTS)[0] }) {
   const [hovered, setHovered] = useState(false)
 
   return (
-    <motion.div
-      onHoverStart={() => setHovered(true)} onHoverEnd={() => setHovered(false)}
-      animate={{ y: hovered ? -4 : 0, boxShadow: hovered ? "0 12px 32px rgba(0,0,0,0.10)" : "0 2px 8px rgba(0,0,0,0.04)" }}
+    <motion.a
+      href={project.link}
+      target="_blank"
+      rel="noopener noreferrer"
+      onHoverStart={() => setHovered(true)}
+      onHoverEnd={() => setHovered(false)}
+      animate={{ y: hovered ? -4 : 0, boxShadow: hovered ? "0 12px 32px rgba(0,0,0,0.14)" : "0 2px 8px rgba(0,0,0,0.04)" }}
       transition={{ duration: 0.2 }}
-      style={{ background: C.card, borderRadius: 8, overflow: "hidden", border: `1px solid ${C.border}`, cursor: "pointer" }}
+      style={{ background: C.card, borderRadius: 8, overflow: "hidden", border: `1px solid ${C.border}`, cursor: "pointer", display: "block", textDecoration: "none", width: 280, flexShrink: 0 }}
     >
-      <div style={{ height: 160, background: C.border, display: "flex", alignItems: "center", justifyContent: "center", color: C.placeholder, fontFamily: "Arial, sans-serif", fontSize: 11, overflow: "hidden" }}>
-        {project.image ? <img src={project.image} alt={project.title} style={{ width: "100%", height: "100%", objectFit: "cover", display: "block" }} /> : "Image"}
+      <div style={{ height: 190, background: C.border, overflow: "hidden" }}>
+        <img src={project.image} alt={project.title} style={{ width: "100%", height: "100%", objectFit: "cover", display: "block" }} />
       </div>
       <div style={{ padding: "18px 20px 20px" }}>
         <div style={{ fontFamily: "Arial, sans-serif", fontSize: 9, letterSpacing: 2, textTransform: "uppercase", color: C.primary, marginBottom: 6 }}>{project.category}</div>
@@ -290,7 +295,7 @@ function ProjectCard({ project }: { project: (typeof PROJECTS)[0] }) {
           View Case Study →
         </motion.span>
       </div>
-    </motion.div>
+    </motion.a>
   )
 }
 
@@ -303,11 +308,9 @@ function Projects() {
           <Eyebrow>Selected Work</Eyebrow>
           <h2 style={{ fontFamily: "Georgia, serif", fontSize: 22, fontWeight: 700, color: C.text, margin: "0 0 32px" }}>Projects</h2>
         </FadeUp>
-        <div style={{ display: "grid", gridTemplateColumns: "repeat(auto-fill, minmax(280px, 1fr))", gap: 20 }}>
-          {PROJECTS.map((p, i) => (
-            <FadeUp key={p.id} delay={i * 0.08}><ProjectCard project={p} /></FadeUp>
-          ))}
-        </div>
+        <Scroller overflow="x" width="100%" height="auto" bgColor={C.surface} noOverflowHidden childrenContainerClassName="gap-5 pb-4 pt-1">
+          {PROJECTS.map((p) => <ProjectCard key={p.id} project={p} />)}
+        </Scroller>
       </div>
     </section>
   )
