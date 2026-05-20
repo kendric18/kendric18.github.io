@@ -308,7 +308,7 @@ function Projects() {
           <Eyebrow>Selected Work</Eyebrow>
           <h2 style={{ fontFamily: "Georgia, serif", fontSize: 22, fontWeight: 700, color: C.text, margin: "0 0 32px" }}>Projects</h2>
         </FadeUp>
-        <Scroller overflow="x" width="100%" height="auto" bgColor={C.surface} noOverflowHidden childrenContainerClassName="gap-5 pb-4 pt-1">
+        <Scroller overflow="x" width="100%" height="auto" bgColor={C.surface} noOverflowHidden withButtons childrenContainerClassName="gap-5 pb-4 pt-1">
           {PROJECTS.map((p) => <ProjectCard key={p.id} project={p} />)}
         </Scroller>
       </div>
