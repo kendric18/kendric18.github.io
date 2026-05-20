@@ -29,7 +29,7 @@ export function ShaderAnimation() {
 
       void main(void) {
         vec2 uv = (gl_FragCoord.xy * 2.0 - resolution.xy) / min(resolution.x, resolution.y);
-        float t = time * 0.05;
+        float t = time * 0.02;
         float lineWidth = 0.002;
 
         vec3 color = vec3(0.0);
@@ -45,7 +45,7 @@ export function ShaderAnimation() {
 
         // Cream background #F5F5F0 = vec3(0.961, 0.961, 0.941)
         vec3 bg = vec3(0.961, 0.961, 0.941);
-        vec3 final = bg - color * 0.30;
+        vec3 final = bg - color * 0.12;
         gl_FragColor = vec4(clamp(final, 0.0, 1.0), 1.0);
       }
     `
@@ -80,7 +80,7 @@ export function ShaderAnimation() {
     let animationId = 0
     const animate = () => {
       animationId = requestAnimationFrame(animate)
-      uniforms.time.value += 0.05
+      uniforms.time.value += 0.02
       renderer.render(scene, camera)
       if (sceneRef.current) sceneRef.current.animationId = animationId
     }
