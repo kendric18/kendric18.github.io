@@ -20,6 +20,51 @@ function FadeUp({ children, delay = 0 }: { children: React.ReactNode; delay?: nu
   )
 }
 
+// ── Fullscreen icon button (shared) ───────────────────────────────────────────
+function FullscreenBtn({ onPress, position = "top-right" }: { onPress: () => void; position?: "top-right" | "top-left" }) {
+  const coords = position === "top-right" ? { top: 10, right: 10 } : { top: 10, left: 10 }
+  return (
+    <button
+      onClick={onPress}
+      title="View fullscreen"
+      style={{
+        position: "absolute", zIndex: 3, ...coords,
+        background: "rgba(0,0,0,0.55)", backdropFilter: "blur(4px)",
+        border: "none", borderRadius: 6, width: 32, height: 32,
+        cursor: "pointer", display: "flex", alignItems: "center", justifyContent: "center",
+      }}
+    >
+      <svg width="14" height="14" viewBox="0 0 16 16" fill="white">
+        <path fillRule="evenodd" clipRule="evenodd" d="M1 1h5v1.5H2.5V5H1V1zm9 0h5v4h-1.5V2.5H10V1zM1 10h1.5v2.5H5V14H1v-4zm11.5 2.5V10H14v4h-4v-1.5h2.5z" />
+      </svg>
+    </button>
+  )
+}
+
+// ── Photo block (standalone image + fullscreen) ───────────────────────────────
+function PhotoBlock({ src, alt }: { src: string; alt: string }) {
+  const ref = useRef<HTMLDivElement>(null)
+  const enterFs = () => {
+    const el = ref.current; if (!el) return
+    if (el.requestFullscreen) el.requestFullscreen()
+    else if ((el as any).webkitRequestFullscreen) (el as any).webkitRequestFullscreen()
+  }
+  return (
+    <div ref={ref} style={{ borderRadius: 12, overflow: "hidden", aspectRatio: "4/3", position: "relative", background: "#000" }}>
+      <motion.img
+        src={src}
+        alt={alt}
+        initial={{ scale: 1.04 }}
+        whileInView={{ scale: 1 }}
+        viewport={{ once: true }}
+        transition={{ duration: 0.8, ease: "easeOut" }}
+        style={{ width: "100%", height: "100%", objectFit: "cover", display: "block" }}
+      />
+      <FullscreenBtn onPress={enterFs} position="top-right" />
+    </div>
+  )
+}
+
 // ── Video Hero ─────────────────────────────────────────────────────────────────
 function VideoHero() {
   const videoRef = useRef<HTMLVideoElement>(null)
@@ -43,7 +88,7 @@ function VideoHero() {
         <source src="/lifty/hero.mp4" type="video/mp4" />
         <source src="/lifty/hero.mov" type="video/quicktime" />
       </video>
-      {/* Custom fullscreen button — top-right so it doesn't clash with browser controls */}
+      {/* Custom fullscreen button — top-right corner, doesn't overlap browser controls */}
       <button
         onClick={handleFullscreen}
         title="Enter fullscreen"
@@ -56,7 +101,7 @@ function VideoHero() {
         }}
       >
         <svg width="15" height="15" viewBox="0 0 16 16" fill="white">
-          <path fillRule="evenodd" clipRule="evenodd" d="M1 1h5v1.5H2.5V5H1V1zm9 0h5v4h-1.5V2.5H10V1zM1 10h1.5v2.5H5V14H1v-4zm11.5 2.5V10H14v4h-4v-1.5h2.5z"/>
+          <path fillRule="evenodd" clipRule="evenodd" d="M1 1h5v1.5H2.5V5H1V1zm9 0h5v4h-1.5V2.5H10V1zM1 10h1.5v2.5H5V14H1v-4zm11.5 2.5V10H14v4h-4v-1.5h2.5z" />
         </svg>
       </button>
     </div>
@@ -66,9 +111,16 @@ function VideoHero() {
 // ── Image Slider ──────────────────────────────────────────────────────────────
 function ImageSlider({ images, colors }: { images: { src: string; alt: string }[]; colors: C }) {
   const [current, setCurrent] = useState(0)
+  const containerRef = useRef<HTMLDivElement>(null)
+
+  const enterFs = () => {
+    const el = containerRef.current; if (!el) return
+    if (el.requestFullscreen) el.requestFullscreen()
+    else if ((el as any).webkitRequestFullscreen) (el as any).webkitRequestFullscreen()
+  }
 
   return (
-    <div style={{ borderRadius: 12, overflow: "hidden", background: colors.border, position: "relative", aspectRatio: "4/3" }}>
+    <div ref={containerRef} style={{ borderRadius: 12, overflow: "hidden", background: colors.border, position: "relative", aspectRatio: "4/3" }}>
       <AnimatePresence mode="wait">
         <motion.img
           key={current}
@@ -82,10 +134,13 @@ function ImageSlider({ images, colors }: { images: { src: string; alt: string }[
         />
       </AnimatePresence>
 
-      {/* Counter badge */}
+      {/* Counter badge — top-right */}
       <div style={{ position: "absolute", top: 10, right: 10, background: "rgba(0,0,0,0.55)", color: "#fff", fontFamily: "Arial, sans-serif", fontSize: 10, padding: "3px 8px", borderRadius: 20, zIndex: 2 }}>
         {current + 1} / {images.length}
       </div>
+
+      {/* Fullscreen button — top-left (avoids counter badge) */}
+      <FullscreenBtn onPress={enterFs} position="top-left" />
 
       {/* Prev */}
       <button
@@ -124,7 +179,6 @@ function GoalsTable({ colors }: { colors: C }) {
   ]
   return (
     <div style={{ margin: "32px 0 0", border: `1px solid ${colors.border}`, borderRadius: 10, overflow: "hidden" }}>
-      {/* Header */}
       <div style={{ display: "grid", gridTemplateColumns: "1fr 1fr", background: colors.surface }}>
         {["Primary Goals", "Success Criteria"].map(h => (
           <div key={h} style={{ padding: "12px 18px", fontFamily: "Arial, sans-serif", fontSize: 9, letterSpacing: "2px", textTransform: "uppercase", color: colors.primary, borderBottom: `1px solid ${colors.border}` }}>
@@ -132,7 +186,6 @@ function GoalsTable({ colors }: { colors: C }) {
           </div>
         ))}
       </div>
-      {/* Rows */}
       {rows.map(({ goal, criteria }, i) => (
         <div key={i} style={{ display: "grid", gridTemplateColumns: "1fr 1fr", borderBottom: i < rows.length - 1 ? `1px solid ${colors.border}` : "none" }}>
           <div style={{ padding: "14px 18px", fontFamily: "Georgia, serif", fontSize: 14, color: colors.text, fontWeight: 600, borderRight: `1px solid ${colors.border}` }}>{goal}</div>
@@ -176,6 +229,13 @@ export default function LiftyPage() {
     { src: "/lifty/cad-4.png", alt: "CAD view 4" },
   ]
 
+  const researchPoints = [
+    "Tasks are time-sensitive (20–40 mins per room) with pressure from guest turnover",
+    "Workflow is interrupted by guests returning, causing rushed work",
+    "High physical workload with low efficiency under time pressure",
+    "Need for modular and deployable solutions",
+  ]
+
   return (
     <div style={{ background: C.bg, minHeight: "100vh", color: C.text }}>
 
@@ -203,7 +263,7 @@ export default function LiftyPage() {
           </p>
 
           {/* Overview */}
-          <p style={{ fontFamily: "Georgia, serif", fontSize: 16, color: C.muted, lineHeight: 1.9, maxWidth: 720, margin: "0 0 0" }}>
+          <p style={{ fontFamily: "Georgia, serif", fontSize: 16, color: C.muted, lineHeight: 1.9, maxWidth: 720, margin: 0 }}>
             LIFTY is an assistive bed-making device developed by Team 2 for LionsBot International Pte Ltd as part of the Product Design Studio 2026 module. The device aims to automate and assist in the bed-making process, reducing physical strain on users and improving efficiency in hospital or hospitality settings.
           </p>
 
@@ -239,6 +299,8 @@ export default function LiftyPage() {
         {/* ── 01 Research & Discovery ── */}
         <FadeUp>
           <StepLabel step="01" title="Research & Discovery" colors={C} />
+
+          {/* 2-col: persona + stats on left, slider on right */}
           <div style={{ display: "grid", gridTemplateColumns: "1fr 1fr", gap: 48, alignItems: "start" }}>
             {/* Text */}
             <div>
@@ -256,27 +318,23 @@ export default function LiftyPage() {
               </div>
 
               {/* Stats */}
-              <p style={{ fontFamily: "Georgia, serif", fontSize: 14, color: C.muted, lineHeight: 1.85, margin: "0 0 16px" }}>
+              <p style={{ fontFamily: "Georgia, serif", fontSize: 14, color: C.muted, lineHeight: 1.85, margin: 0 }}>
                 Bed-making is physically demanding — involving constant bending, lifting and tucking. Housekeepers perform <strong>250–600 bends</strong> and <strong>70–200 mattress lifts per day</strong>, clean 12–20 rooms, and walk 8–16 km per shift. Trunk flexion analysis shows bending past 90° is common, placing workers at very high risk of back injury. Up to <strong>70% of housekeepers</strong> develop musculoskeletal disorders. Lifting forces can reach 2,000–6,000 N per lift, accumulating to an estimated <strong>960,000 N/day</strong> on the lower back — equivalent to the weight of 20 adult elephants.
               </p>
-
-              <div style={{ display: "flex", flexDirection: "column", gap: 8 }}>
-                {[
-                  "Tasks are time-sensitive (20–40 mins per room) with pressure from guest turnover",
-                  "Workflow is interrupted by guests returning, causing rushed work",
-                  "High physical workload with low efficiency under time pressure",
-                  "Need for modular and deployable solutions",
-                ].map((point, i) => (
-                  <div key={i} style={{ display: "flex", gap: 10, alignItems: "flex-start" }}>
-                    <span style={{ color: C.primary, fontFamily: "Arial, sans-serif", fontSize: 12, marginTop: 2, flexShrink: 0 }}>→</span>
-                    <span style={{ fontFamily: "Georgia, serif", fontSize: 13, color: C.muted, lineHeight: 1.7 }}>{point}</span>
-                  </div>
-                ))}
-              </div>
             </div>
 
             {/* Slider */}
             <ImageSlider images={researchImages} colors={C} />
+          </div>
+
+          {/* Key findings — full width below the grid */}
+          <div style={{ display: "flex", flexDirection: "column", gap: 10, marginTop: 32 }}>
+            {researchPoints.map((point, i) => (
+              <div key={i} style={{ display: "flex", gap: 12, alignItems: "flex-start" }}>
+                <span style={{ color: C.primary, fontFamily: "Arial, sans-serif", fontSize: 13, marginTop: 1, flexShrink: 0 }}>→</span>
+                <span style={{ fontFamily: "Georgia, serif", fontSize: 14, color: C.muted, lineHeight: 1.7 }}>{point}</span>
+              </div>
+            ))}
           </div>
         </FadeUp>
 
@@ -332,17 +390,7 @@ export default function LiftyPage() {
                 Firmware running on the microcontroller managed PWM speed control, limit-switch debouncing, and a simple state machine for the tucking sequence — ensuring repeatable, safe operation across different mattress heights and sheet thicknesses.
               </p>
             </div>
-            <div style={{ borderRadius: 12, overflow: "hidden", aspectRatio: "4/3", background: C.border }}>
-              <motion.img
-                src="https://images.unsplash.com/photo-1518770660439-4636190af475?w=900&q=80"
-                alt="Electronics prototyping"
-                initial={{ scale: 1.04 }}
-                whileInView={{ scale: 1 }}
-                viewport={{ once: true }}
-                transition={{ duration: 0.8, ease: "easeOut" }}
-                style={{ width: "100%", height: "100%", objectFit: "cover", display: "block" }}
-              />
-            </div>
+            <PhotoBlock src="https://images.unsplash.com/photo-1518770660439-4636190af475?w=900&q=80" alt="Electronics prototyping" />
           </div>
         </FadeUp>
 
@@ -352,17 +400,7 @@ export default function LiftyPage() {
         <FadeUp>
           <StepLabel step="04" title="Testing & Iteration" colors={C} />
           <div style={{ display: "grid", gridTemplateColumns: "1fr 1fr", gap: 48, alignItems: "start" }}>
-            <div style={{ borderRadius: 12, overflow: "hidden", aspectRatio: "4/3", background: C.border }}>
-              <motion.img
-                src="https://images.unsplash.com/photo-1485827404703-89b55fcc595e?w=900&q=80"
-                alt="Testing the prototype"
-                initial={{ scale: 1.04 }}
-                whileInView={{ scale: 1 }}
-                viewport={{ once: true }}
-                transition={{ duration: 0.8, ease: "easeOut" }}
-                style={{ width: "100%", height: "100%", objectFit: "cover", display: "block" }}
-              />
-            </div>
+            <PhotoBlock src="https://images.unsplash.com/photo-1485827404703-89b55fcc595e?w=900&q=80" alt="Testing the prototype" />
             <div>
               <p style={{ fontFamily: "Georgia, serif", fontSize: 14, color: C.muted, lineHeight: 1.85, margin: "0 0 20px" }}>
                 The assembled prototype was tested with hotel housekeeping staff to measure time savings and physical effort reduction against the baseline. Force gauge readings confirmed a significant reduction in peak lifting force, while timed trials across 10 bed-making cycles showed consistent performance.
