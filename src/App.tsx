@@ -43,7 +43,7 @@ const useTheme = () => useContext(ThemeContext)
 const PHOTO_URL = "/kendric.jpg"
 
 const PROJECTS = [
-  { id: "lifty", category: "Product Design · Hardware", title: "Lifty", subtitle: "SUTD × LionsBot International", image: "https://images.unsplash.com/photo-1485827404703-89b55fcc595e?w=600&q=80", link: "/projects/lifty" },
+  { id: "lifty", category: "Product Design · Hardware", title: "Lifty", subtitle: "SUTD × LionsBot International", image: "/lifty/lifty-card.jpg", link: "/projects/lifty" },
   { id: "project-2", category: "UX / AI", title: "Project 2", subtitle: "SUTD studio project", image: "https://images.unsplash.com/photo-1555421689-3f034debb73a?w=600&q=80", link: "#" },
   { id: "project-3", category: "Design Systems", title: "Project 3", subtitle: "SUTD studio project", image: "https://images.unsplash.com/photo-1561070791-2526d30994b5?w=600&q=80", link: "#" },
   { id: "project-4", category: "Research", title: "Project 4", subtitle: "SUTD studio project", image: "https://images.unsplash.com/photo-1517048676732-d65bc937f952?w=600&q=80", link: "#" },
