@@ -61,7 +61,8 @@ function GalleryVideo({ mp4, mov }: { mp4?: string; mov?: string }) {
 }
 
 // ── Photo block (standalone image + fullscreen) ───────────────────────────────
-function PhotoBlock({ src, alt }: { src: string; alt: string }) {
+// contain=true shows the full image without cropping (used in gallery)
+function PhotoBlock({ src, alt, contain = false }: { src: string; alt: string; contain?: boolean }) {
   const ref = useRef<HTMLDivElement>(null)
   const enterFs = () => {
     const el = ref.current; if (!el) return
@@ -69,15 +70,15 @@ function PhotoBlock({ src, alt }: { src: string; alt: string }) {
     else if ((el as any).webkitRequestFullscreen) (el as any).webkitRequestFullscreen()
   }
   return (
-    <div ref={ref} style={{ borderRadius: 12, overflow: "hidden", aspectRatio: "4/3", position: "relative", background: "#000" }}>
+    <div ref={ref} style={{ borderRadius: 12, overflow: "hidden", position: "relative", background: "#000", ...(contain ? {} : { aspectRatio: "4/3" }) }}>
       <motion.img
         src={src}
         alt={alt}
-        initial={{ scale: 1.04 }}
+        initial={{ scale: contain ? 1 : 1.04 }}
         whileInView={{ scale: 1 }}
         viewport={{ once: true }}
         transition={{ duration: 0.8, ease: "easeOut" }}
-        style={{ width: "100%", height: "100%", objectFit: "cover", display: "block" }}
+        style={{ width: "100%", height: contain ? "auto" : "100%", objectFit: contain ? undefined : "cover", display: "block" }}
       />
       <FullscreenBtn onPress={enterFs} position="top-right" />
     </div>
@@ -466,13 +467,13 @@ export default function LiftyPage() {
           <h2 style={{ fontFamily: "Georgia, serif", fontSize: 28, fontWeight: 700, color: C.text, margin: "0 0 40px" }}>Project Media</h2>
         </FadeUp>
         <FadeUp delay={0.05}>
-          {/* Main demo video — full width */}
-          <GalleryVideo mp4="/lifty/hero.mp4" mov="/lifty/hero.mov" />
+          {/* Main demo video — full width (IMG_4693.MOV) */}
+          <GalleryVideo mov="/lifty/hero.mov" />
         </FadeUp>
         <FadeUp delay={0.1}>
           {/* Photo + secondary video side by side */}
           <div style={{ display: "grid", gridTemplateColumns: "1fr 1fr", gap: 20, marginTop: 20 }}>
-            <PhotoBlock src="/lifty/gallery-photo-1.jpg" alt="Lifty project photo" />
+            <PhotoBlock src="/lifty/gallery-photo-1.jpg" alt="Lifty project photo" contain />
             <GalleryVideo mov="/lifty/gallery-vid-2.mov" />
           </div>
         </FadeUp>
