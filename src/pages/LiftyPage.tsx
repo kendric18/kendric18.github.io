@@ -41,6 +41,25 @@ function FullscreenBtn({ onPress, position = "top-right" }: { onPress: () => voi
   )
 }
 
+// ── Gallery video block ───────────────────────────────────────────────────────
+function GalleryVideo({ mp4, mov }: { mp4?: string; mov?: string }) {
+  const ref = useRef<HTMLVideoElement>(null)
+  const enterFs = () => {
+    const v = ref.current; if (!v) return
+    if (v.requestFullscreen) v.requestFullscreen()
+    else if ((v as any).webkitRequestFullscreen) (v as any).webkitRequestFullscreen()
+  }
+  return (
+    <div style={{ borderRadius: 12, overflow: "hidden", position: "relative", aspectRatio: "16/9", background: "#000" }}>
+      <video ref={ref} controls playsInline style={{ width: "100%", height: "100%", objectFit: "cover", display: "block" }}>
+        {mp4 && <source src={mp4} type="video/mp4" />}
+        {mov && <source src={mov} type="video/quicktime" />}
+      </video>
+      <FullscreenBtn onPress={enterFs} position="top-right" />
+    </div>
+  )
+}
+
 // ── Photo block (standalone image + fullscreen) ───────────────────────────────
 function PhotoBlock({ src, alt }: { src: string; alt: string }) {
   const ref = useRef<HTMLDivElement>(null)
@@ -228,6 +247,12 @@ export default function LiftyPage() {
     { src: "/lifty/cad-2.png", alt: "CAD view 2" },
     { src: "/lifty/cad-3.png", alt: "CAD view 3" },
     { src: "/lifty/cad-4.png", alt: "CAD view 4" },
+  ]
+
+  const testImages = [
+    { src: "/lifty/test-1.jpg", alt: "Testing iteration" },
+    { src: "/lifty/test-2.png", alt: "Test results" },
+    { src: "/lifty/test-3.png", alt: "Final test" },
   ]
 
   const protoImages = [
@@ -424,15 +449,31 @@ export default function LiftyPage() {
         <FadeUp>
           <StepLabel step="04" title="Testing & Iteration" colors={C} />
           <div style={{ display: "grid", gridTemplateColumns: "1fr 1fr", gap: 48, alignItems: "start" }}>
-            <PhotoBlock src="https://images.unsplash.com/photo-1485827404703-89b55fcc595e?w=900&q=80" alt="Testing the prototype" />
+            <ImageSlider images={testImages} colors={C} />
             <div>
-              <p style={{ fontFamily: "Georgia, serif", fontSize: 14, color: C.muted, lineHeight: 1.85, margin: "0 0 20px" }}>
-                The assembled prototype was tested with hotel housekeeping staff to measure time savings and physical effort reduction against the baseline. Force gauge readings confirmed a significant reduction in peak lifting force, while timed trials across 10 bed-making cycles showed consistent performance.
-              </p>
               <p style={{ fontFamily: "Georgia, serif", fontSize: 14, color: C.muted, lineHeight: 1.85, margin: 0 }}>
-                Feedback from users drove two mechanical revisions — tightening the sheet-grip clamping force and adjusting the tucking path depth to accommodate thicker mattresses. Final user satisfaction scored above the 70% positive-feedback target set at the project outset.
+                The prototype went through 13 structured test iterations — starting with validating motor torque and actuator load capacity, confirming the chassis had enough space to house the battery, wiring, and motor drivers, and verifying the locking mechanism, scissor-lift, and wheel system. Subsequent iterations refined the slider's ability to glide smoothly under a mattress, validated LED and main power controls, and improved the overall ergonomics and ease of handling. The final iteration tested the fully integrated system — new exterior, buttons, actuator, wheels, slider, and grip design all operating together. LionsBot International was very pleased with the results.
               </p>
             </div>
+          </div>
+        </FadeUp>
+      </div>
+
+      {/* ── Gallery ── */}
+      <div style={{ maxWidth: 860, margin: "0 auto", padding: "0 40px 100px" }}>
+        <FadeUp>
+          <div style={{ fontFamily: "Arial, sans-serif", fontSize: 9, letterSpacing: "3px", textTransform: "uppercase", color: C.primary, marginBottom: 12 }}>Gallery</div>
+          <h2 style={{ fontFamily: "Georgia, serif", fontSize: 28, fontWeight: 700, color: C.text, margin: "0 0 40px" }}>Project Media</h2>
+        </FadeUp>
+        <FadeUp delay={0.05}>
+          {/* Main demo video — full width */}
+          <GalleryVideo mp4="/lifty/hero.mp4" mov="/lifty/hero.mov" />
+        </FadeUp>
+        <FadeUp delay={0.1}>
+          {/* Photo + secondary video side by side */}
+          <div style={{ display: "grid", gridTemplateColumns: "1fr 1fr", gap: 20, marginTop: 20 }}>
+            <PhotoBlock src="/lifty/gallery-photo-1.jpg" alt="Lifty project photo" />
+            <GalleryVideo mov="/lifty/gallery-vid-2.mov" />
           </div>
         </FadeUp>
       </div>
