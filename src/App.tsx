@@ -348,14 +348,14 @@ function About() {
         style={{
           maxWidth: 960,
           margin: "0 auto",
-          display: "flex",
+          display: "grid",
+          gridTemplateColumns: "1fr 1fr",
           gap: 56,
-          alignItems: "flex-start",
-          flexWrap: "wrap",
+          alignItems: "center",
         }}
       >
         <FadeUp>
-          <div style={{ flex: "1 1 320px" }}>
+          <div>
             <Eyebrow>About</Eyebrow>
             <h2
               style={{
@@ -398,11 +398,10 @@ function About() {
         <FadeUp delay={0.15}>
           <div
             style={{
-              width: 130,
-              height: 165,
-              borderRadius: 10,
+              width: "100%",
+              aspectRatio: "3 / 4",
+              borderRadius: 16,
               overflow: "hidden",
-              flexShrink: 0,
               background: C.border,
             }}
           >
@@ -413,7 +412,7 @@ function About() {
                 width: "100%",
                 height: "100%",
                 objectFit: "cover",
-                objectPosition: "center top",
+                objectPosition: "center 15%",
                 display: "block",
               }}
             />
