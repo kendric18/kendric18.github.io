@@ -224,7 +224,7 @@ function Hero() {
         </h1>
 
         <motion.p initial={{ opacity: 0 }} animate={{ opacity: 1 }} transition={{ delay: 1, duration: 0.6 }} style={{ marginTop: 36, fontFamily: "Georgia, serif", fontStyle: "italic", fontSize: 15, color: C.muted, letterSpacing: "0.3px", textAlign: "center" }}>
-          Designing human experiences in code.
+          Design-led. Craft-driven.
         </motion.p>
 
         <motion.div animate={{ y: bounce ? 6 : 0 }} transition={{ duration: 0.6, ease: "easeInOut" }} style={{ marginTop: 20, color: C.placeholder, fontSize: 22, lineHeight: 1 }}>
