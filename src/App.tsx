@@ -1,8 +1,10 @@
 import { useState, useEffect, useContext, createContext } from "react"
 import type { CSSProperties, ReactNode } from "react"
 import { motion, AnimatePresence } from "framer-motion"
+import { Routes, Route, Link } from "react-router-dom"
 import { ShaderAnimation } from "./ShaderAnimation"
 import { Scroller } from "@/components/ui/scroller-1"
+import LiftyPage from "./pages/LiftyPage"
 
 // ─── COLOUR TOKENS ────────────────────────────────────────────────────────────
 const LIGHT = {
@@ -34,14 +36,14 @@ const DARK = {
 // ─── THEME CONTEXT ────────────────────────────────────────────────────────────
 type Colors = typeof LIGHT
 type ThemeCtx = { C: Colors; dark: boolean; toggle: () => void }
-const ThemeContext = createContext<ThemeCtx>({ C: LIGHT, dark: false, toggle: () => {} })
+export const ThemeContext = createContext<ThemeCtx>({ C: LIGHT, dark: false, toggle: () => {} })
 const useTheme = () => useContext(ThemeContext)
 
 // ─── DATA ─────────────────────────────────────────────────────────────────────
 const PHOTO_URL = "/kendric.jpg"
 
 const PROJECTS = [
-  { id: "lifty", category: "Product Design · Hardware", title: "Lifty", subtitle: "SUTD × LionsBot International", image: "https://images.unsplash.com/photo-1485827404703-89b55fcc595e?w=600&q=80", link: "#" },
+  { id: "lifty", category: "Product Design · Hardware", title: "Lifty", subtitle: "SUTD × LionsBot International", image: "https://images.unsplash.com/photo-1485827404703-89b55fcc595e?w=600&q=80", link: "/projects/lifty" },
   { id: "project-2", category: "UX / AI", title: "Project 2", subtitle: "SUTD studio project", image: "https://images.unsplash.com/photo-1555421689-3f034debb73a?w=600&q=80", link: "#" },
   { id: "project-3", category: "Design Systems", title: "Project 3", subtitle: "SUTD studio project", image: "https://images.unsplash.com/photo-1561070791-2526d30994b5?w=600&q=80", link: "#" },
   { id: "project-4", category: "Research", title: "Project 4", subtitle: "SUTD studio project", image: "https://images.unsplash.com/photo-1517048676732-d65bc937f952?w=600&q=80", link: "#" },
@@ -273,16 +275,15 @@ function ProjectCard({ project }: { project: (typeof PROJECTS)[0] }) {
   const { C } = useTheme()
   const [hovered, setHovered] = useState(false)
 
-  return (
-    <motion.a
-      href={project.link}
-      target="_blank"
-      rel="noopener noreferrer"
+  const isInternal = project.link.startsWith("/")
+  const cardStyle = { background: C.card, borderRadius: 8, overflow: "hidden", border: `1px solid ${C.border}`, cursor: "pointer", display: "block", textDecoration: "none", width: 280, flexShrink: 0 as const }
+  const inner = (
+    <motion.div
       onHoverStart={() => setHovered(true)}
       onHoverEnd={() => setHovered(false)}
       animate={{ y: hovered ? -4 : 0, boxShadow: hovered ? "0 12px 32px rgba(0,0,0,0.14)" : "0 2px 8px rgba(0,0,0,0.04)" }}
       transition={{ duration: 0.2 }}
-      style={{ background: C.card, borderRadius: 8, overflow: "hidden", border: `1px solid ${C.border}`, cursor: "pointer", display: "block", textDecoration: "none", width: 280, flexShrink: 0 }}
+      style={cardStyle}
     >
       <div style={{ height: 190, background: C.border, overflow: "hidden" }}>
         <img src={project.image} alt={project.title} style={{ width: "100%", height: "100%", objectFit: "cover", display: "block" }} />
@@ -295,8 +296,12 @@ function ProjectCard({ project }: { project: (typeof PROJECTS)[0] }) {
           View Case Study →
         </motion.span>
       </div>
-    </motion.a>
+    </motion.div>
   )
+
+  return isInternal
+    ? <Link to={project.link} style={{ textDecoration: "none" }}>{inner}</Link>
+    : <a href={project.link} target="_blank" rel="noopener noreferrer" style={{ textDecoration: "none" }}>{inner}</a>
 }
 
 function Projects() {
@@ -366,6 +371,21 @@ function Contact() {
   )
 }
 
+// ─── PORTFOLIO (main page) ────────────────────────────────────────────────────
+function Portfolio() {
+  const { C } = useTheme()
+  return (
+    <div style={{ fontFamily: "Georgia, serif", background: C.bg, minHeight: "100vh", overflowX: "hidden" }}>
+      <Nav />
+      <Hero />
+      <About />
+      <Projects />
+      <Skills />
+      <Contact />
+    </div>
+  )
+}
+
 // ─── ROOT ─────────────────────────────────────────────────────────────────────
 export default function App() {
   const [dark, setDark] = useState(false)
@@ -373,14 +393,10 @@ export default function App() {
 
   return (
     <ThemeContext.Provider value={theme}>
-      <div style={{ fontFamily: "Georgia, serif", background: theme.C.bg, minHeight: "100vh", overflowX: "hidden" }}>
-        <Nav />
-        <Hero />
-        <About />
-        <Projects />
-        <Skills />
-        <Contact />
-      </div>
+      <Routes>
+        <Route path="/" element={<Portfolio />} />
+        <Route path="/projects/lifty" element={<LiftyPage />} />
+      </Routes>
     </ThemeContext.Provider>
   )
 }
