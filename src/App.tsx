@@ -390,8 +390,7 @@ function About() {
                 margin: 0,
               }}
             >
-              VP of Scratch Club. Customer Success at Edgeline Planners. Open to internships in
-              Singapore.
+              BSc Design and AI (DAI) at SUTD | VP of Scratch Club | Customer Success at Edgeline Planners
             </p>
           </div>
         </FadeUp>
