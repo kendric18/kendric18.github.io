@@ -49,9 +49,11 @@ const PROJECTS = [
 const SKILLS = ["Product Design", "UX Research", "Figma / Framer", "Python / C++", "CAD / Fusion 360", "AutoCAD", "Electronics / Arduino", "AI / ML"]
 
 const EXPERIENCE = [
-  { role: "Customer Success", org: "Edgeline Planners", years: "2024 – Present" },
+  { role: "Product Design & Prototyping", org: "LionsBot International", years: "Jan – Apr 2026" },
+  { role: "Customer Success Executive", org: "Edgeline Planners", years: "2026 – Present" },
+  { role: "Electrical Engineer Intern", org: "Keppel (Infrastructure Division)", years: "2025 – 2027" },
   { role: "VP, Scratch Club", org: "SUTD", years: "2024 – Present" },
-  { role: "Assistant Carpenter", org: "The Wood Creation", years: "2018 – 2024" },
+  { role: "Part-time Design Drafter", org: "The Wood Creation", years: "2020 – 2025" },
 ]
 
 const NAV_LINKS = ["HOME", "ABOUT", "PROJECTS", "EXPERIENCE", "CONTACT"]
@@ -296,7 +298,7 @@ function Projects() {
       <div style={{ maxWidth: 960, margin: "0 auto" }}>
         <FadeUp>
           <Eyebrow>Selected Work</Eyebrow>
-          <h2 style={{ fontFamily: "Georgia, serif", fontSize: 22, fontWeight: 700, color: C.text, margin: "0 0 32px" }}>4 projects · 2023–2025</h2>
+          <h2 style={{ fontFamily: "Georgia, serif", fontSize: 22, fontWeight: 700, color: C.text, margin: "0 0 32px" }}>Projects</h2>
         </FadeUp>
         <div style={{ display: "grid", gridTemplateColumns: "repeat(auto-fill, minmax(280px, 1fr))", gap: 20 }}>
           {PROJECTS.map((p, i) => (
@@ -318,7 +320,7 @@ function Skills() {
           <div style={{ flex: "1 1 260px" }}>
             <Eyebrow>Skills</Eyebrow>
             <div style={{ display: "flex", flexWrap: "wrap", gap: 8 }}>
-              {SKILLS.map((skill) => <SkillPill key={skill} highlight={skill === "AI / ML"}>{skill}</SkillPill>)}
+              {SKILLS.map((skill) => <SkillPill key={skill} highlight={false}>{skill}</SkillPill>)}
             </div>
           </div>
         </FadeUp>
