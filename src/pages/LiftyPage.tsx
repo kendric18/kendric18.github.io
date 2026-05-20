@@ -1,4 +1,4 @@
-import React, { useContext, useRef, useState } from "react"
+import React, { useContext, useEffect, useRef, useState } from "react"
 import { Link } from "react-router-dom"
 import { motion, AnimatePresence } from "framer-motion"
 import { ThemeContext } from "../App"
@@ -215,6 +215,14 @@ function Divider({ colors }: { colors: C }) {
 export default function LiftyPage() {
   const { C } = useContext(ThemeContext)
 
+  // Parallax scroll tracking
+  const [scrollY, setScrollY] = useState(0)
+  useEffect(() => {
+    const onScroll = () => setScrollY(window.scrollY)
+    window.addEventListener("scroll", onScroll, { passive: true })
+    return () => window.removeEventListener("scroll", onScroll)
+  }, [])
+
   const researchImages = [
     { src: "/lifty/research-1.jpg", alt: "Research photo 1" },
     { src: "/lifty/research-2.jpg", alt: "Research photo 2" },
@@ -244,7 +252,18 @@ export default function LiftyPage() {
   ]
 
   return (
-    <div style={{ background: C.bg, minHeight: "100vh", color: C.text }}>
+    <div style={{ minHeight: "100vh", color: C.text, position: "relative" }}>
+
+      {/* ── Parallax background — only visible in left/right gutters ── */}
+      <div style={{
+        position: "fixed",
+        inset: 0,
+        backgroundImage: "url('/lifty/bg.jpg')",
+        backgroundSize: "cover",
+        backgroundPosition: `center ${50 - scrollY * 0.008}%`,
+        zIndex: -1,
+        pointerEvents: "none",
+      }} />
 
       {/* ── Sticky nav bar ── */}
       <div style={{ position: "sticky", top: 0, zIndex: 50, backdropFilter: "blur(12px)", backgroundColor: C.navBg, borderBottom: `1px solid ${C.border}`, padding: "16px 40px" }}>
@@ -257,7 +276,7 @@ export default function LiftyPage() {
       <VideoHero />
 
       {/* ── Header ── */}
-      <div style={{ maxWidth: 860, margin: "0 auto", padding: "60px 40px 0" }}>
+      <div style={{ maxWidth: 860, margin: "0 auto", background: C.bg, padding: "60px 40px 0" }}>
         <FadeUp>
           <div style={{ fontFamily: "Arial, sans-serif", fontSize: 9, letterSpacing: "3px", textTransform: "uppercase", color: C.primary, marginBottom: 16 }}>
             Product Design · Hardware
@@ -297,7 +316,7 @@ export default function LiftyPage() {
       </div>
 
       {/* ── Process ── */}
-      <div style={{ maxWidth: 860, margin: "0 auto", padding: "0 40px 120px" }}>
+      <div style={{ maxWidth: 860, margin: "0 auto", background: C.bg, padding: "0 40px 120px" }}>
         <FadeUp>
           <div style={{ fontFamily: "Arial, sans-serif", fontSize: 9, letterSpacing: "3px", textTransform: "uppercase", color: C.primary, marginBottom: 12 }}>Process</div>
           <h2 style={{ fontFamily: "Georgia, serif", fontSize: 28, fontWeight: 700, color: C.text, margin: "0 0 72px" }}>How it was made</h2>
@@ -437,7 +456,7 @@ export default function LiftyPage() {
       </div>
 
       {/* ── Footer nav ── */}
-      <div style={{ borderTop: `1px solid ${C.border}`, padding: "40px", textAlign: "center" }}>
+      <div style={{ background: C.bg, borderTop: `1px solid ${C.border}`, padding: "40px", textAlign: "center" }}>
         <Link to="/" style={{ fontFamily: "Arial, sans-serif", fontSize: 11, letterSpacing: "1px", textTransform: "uppercase", color: C.muted, textDecoration: "none" }}>
           ← Back to portfolio
         </Link>
