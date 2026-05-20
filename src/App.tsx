@@ -398,11 +398,12 @@ function About() {
         <FadeUp delay={0.15}>
           <div
             style={{
-              width: "100%",
+              width: "66%",
               aspectRatio: "3 / 4",
               borderRadius: 16,
               overflow: "hidden",
               background: C.border,
+              margin: "0 auto",
             }}
           >
             <img
