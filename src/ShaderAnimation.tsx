@@ -102,7 +102,7 @@ export function ShaderAnimation() {
     <div
       ref={containerRef}
       style={{
-        position: "fixed",
+        position: "absolute",
         inset: 0,
         zIndex: 0,
         overflow: "hidden",
