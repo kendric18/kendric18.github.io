@@ -52,7 +52,7 @@ const SKILLS = ["Product Design", "UX Research", "Figma / Framer", "Python / C++
 const EXPERIENCE = [
   { role: "Product Design & Prototyping", org: "LionsBot International", years: "Jan – Apr 2026" },
   { role: "Customer Success Executive", org: "Edgeline Planners", years: "2026 – Present" },
-  { role: "Electrical Engineer Intern", org: "Keppel (Infrastructure Division)", years: "2025 – 2027" },
+  { role: "Electrical Engineer Intern", org: "Keppel (Infrastructure Division)", years: "2021 – 2022" },
   { role: "VP, Scratch Club", org: "SUTD", years: "2024 – Present" },
   { role: "Part-time Design Drafter", org: "The Wood Creation", years: "2020 – 2025" },
 ]
