@@ -467,14 +467,14 @@ export default function LiftyPage() {
           <h2 style={{ fontFamily: "Georgia, serif", fontSize: 28, fontWeight: 700, color: C.text, margin: "0 0 40px" }}>Project Media</h2>
         </FadeUp>
         <FadeUp delay={0.05}>
-          {/* Main demo video — full width (IMG_4693.MOV) */}
-          <GalleryVideo mov="/lifty/hero.mov" />
+          {/* Main demo video — full width */}
+          <GalleryVideo mp4="/lifty/hero1.mp4" />
         </FadeUp>
         <FadeUp delay={0.1}>
           {/* Photo + secondary video side by side */}
           <div style={{ display: "grid", gridTemplateColumns: "1fr 1fr", gap: 20, marginTop: 20 }}>
             <PhotoBlock src="/lifty/gallery-photo-1.jpg" alt="Lifty project photo" contain />
-            <GalleryVideo mov="/lifty/gallery-vid-2.mov" />
+            <GalleryVideo mp4="/lifty/gallery-vid-2.mp4" />
           </div>
         </FadeUp>
       </div>
