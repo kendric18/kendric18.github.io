@@ -290,7 +290,7 @@ export default function LiftyPage() {
 
           {/* Overview */}
           <p style={{ fontFamily: "Georgia, serif", fontSize: 16, color: C.muted, lineHeight: 1.9, maxWidth: 720, margin: 0 }}>
-            LIFTY is an assistive bed-making device developed by Team 2 for LionsBot International Pte Ltd as part of the Product Design Studio 2026 module. The device aims to automate and assist in the bed-making process, reducing physical strain on users and improving efficiency in hospital or hospitality settings.
+            LIFTY is an assistive bed-making device developed by me and my teammates for LionsBot International Pte Ltd as part of the Product Design Studio 2026 module. The device aims to automate and assist in the bed-making process, reducing physical strain on users and improving efficiency in hospital or hospitality settings.
           </p>
 
           {/* Goals table */}
@@ -302,7 +302,7 @@ export default function LiftyPage() {
           <div style={{ display: "grid", gridTemplateColumns: "repeat(auto-fit, minmax(160px, 1fr))", gap: 32, paddingTop: 56, paddingBottom: 60, borderBottom: `1px solid ${C.border}`, marginBottom: 80 }}>
             {[
               { label: "Role", value: "Product Designer" },
-              { label: "Team", value: "SUTD Team 2 × LionsBot Eng." },
+              { label: "Team", value: "SUTD × LionsBot Eng." },
               { label: "Tools", value: "Fusion 360 · Figma · Arduino" },
               { label: "Duration", value: "Jan – Apr 2026" },
             ].map(({ label, value }) => (
