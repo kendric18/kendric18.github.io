@@ -187,9 +187,18 @@ function Nav() {
             >
               <button onClick={() => setOpen(false)} style={{ alignSelf: "flex-end", background: "none", border: "none", fontSize: 20, cursor: "pointer", color: C.muted, lineHeight: 1 }} aria-label="Close menu">×</button>
               {NAV_LINKS.map((link) => (
-                <a key={link} href={`#${link.toLowerCase()}`} onClick={() => setOpen(false)} style={{ fontFamily: "Arial, sans-serif", fontSize: 12, letterSpacing: "1px", textTransform: "uppercase", color: C.text, textDecoration: "none" }}>
+                <button
+                  key={link}
+                  onClick={() => {
+                    setOpen(false)
+                    setTimeout(() => {
+                      document.getElementById(link.toLowerCase())?.scrollIntoView({ behavior: "smooth" })
+                    }, 300) // wait for drawer close animation
+                  }}
+                  style={{ fontFamily: "Arial, sans-serif", fontSize: 12, letterSpacing: "1px", textTransform: "uppercase", color: C.text, textDecoration: "none", background: "none", border: "none", cursor: "pointer", padding: 0, textAlign: "left" }}
+                >
                   {link}
-                </a>
+                </button>
               ))}
             </motion.div>
           </>
