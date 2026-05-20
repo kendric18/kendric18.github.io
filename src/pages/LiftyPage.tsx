@@ -1,43 +1,12 @@
-import { useContext } from "react"
+import React, { useContext, useRef, useState } from "react"
 import { Link } from "react-router-dom"
-import { motion } from "framer-motion"
+import { motion, AnimatePresence } from "framer-motion"
 import { ThemeContext } from "../App"
 
-const PROCESS_STEPS = [
-  {
-    step: "01",
-    title: "Research & Discovery",
-    description:
-      "Conducted on-site observations at SUTD to understand how students and staff interact with cleaning robots. Interviewed LionsBot engineers to map technical constraints, and benchmarked competitor products to identify gaps in usability and human-robot interaction.",
-    image: "https://images.unsplash.com/photo-1517048676732-d65bc937f952?w=900&q=80",
-    alt: "Research session with sticky notes",
-  },
-  {
-    step: "02",
-    title: "Ideation & Sketching",
-    description:
-      "Generated over 60 concept sketches exploring different form factors, interaction models, and emotional registers for the robot. Ran a rapid design sprint with the team to converge on three distinct directions before selecting the 'companion' concept — a form language that feels approachable rather than industrial.",
-    image: "https://images.unsplash.com/photo-1503676260728-1c00da094a0b?w=900&q=80",
-    alt: "Concept sketches",
-  },
-  {
-    step: "03",
-    title: "CAD & Prototyping",
-    description:
-      "Modelled the chosen concept in Fusion 360, iterating on proportions and internal component clearances in close collaboration with LionsBot's mechanical team. Produced foam and FDM 3D-printed mock-ups at 1:1 scale to test ergonomics and visual presence in corridor spaces.",
-    image: "https://images.unsplash.com/photo-1518770660439-4636190af475?w=900&q=80",
-    alt: "CAD and 3D prototyping",
-  },
-  {
-    step: "04",
-    title: "Testing & Iteration",
-    description:
-      "Placed low-fidelity prototypes in SUTD corridors and observed unprompted reactions from passersby. Collected structured feedback on perceived safety, personality, and trust. Insights drove two major form revisions — softening the top profile and adding an expressive LED ring that signals intent.",
-    image: "https://images.unsplash.com/photo-1485827404703-89b55fcc595e?w=900&q=80",
-    alt: "User testing in corridor",
-  },
-]
+// ── Types ──────────────────────────────────────────────────────────────────────
+type C = React.ContextType<typeof ThemeContext>["C"]
 
+// ── FadeUp helper ─────────────────────────────────────────────────────────────
 function FadeUp({ children, delay = 0 }: { children: React.ReactNode; delay?: number }) {
   return (
     <motion.div
@@ -51,32 +20,174 @@ function FadeUp({ children, delay = 0 }: { children: React.ReactNode; delay?: nu
   )
 }
 
+// ── Video Hero ─────────────────────────────────────────────────────────────────
+function VideoHero() {
+  const videoRef = useRef<HTMLVideoElement>(null)
+
+  const handleFullscreen = () => {
+    const v = videoRef.current
+    if (!v) return
+    if (v.requestFullscreen) v.requestFullscreen()
+    else if ((v as any).webkitRequestFullscreen) (v as any).webkitRequestFullscreen()
+    else if ((v as any).mozRequestFullScreen) (v as any).mozRequestFullScreen()
+  }
+
+  return (
+    <div style={{ position: "relative", width: "100%", background: "#000", overflow: "hidden", maxHeight: "60vh", display: "flex", alignItems: "center", justifyContent: "center" }}>
+      <video
+        ref={videoRef}
+        style={{ width: "100%", maxHeight: "60vh", objectFit: "cover", display: "block" }}
+        controls
+        playsInline
+      >
+        <source src="/lifty/hero.mp4" type="video/mp4" />
+        <source src="/lifty/hero.mov" type="video/quicktime" />
+      </video>
+      {/* Custom fullscreen button — top-right so it doesn't clash with browser controls */}
+      <button
+        onClick={handleFullscreen}
+        title="Enter fullscreen"
+        style={{
+          position: "absolute", top: 12, right: 12,
+          background: "rgba(0,0,0,0.55)", backdropFilter: "blur(4px)",
+          border: "none", borderRadius: 6, width: 34, height: 34,
+          cursor: "pointer", display: "flex", alignItems: "center", justifyContent: "center",
+          zIndex: 10,
+        }}
+      >
+        <svg width="15" height="15" viewBox="0 0 16 16" fill="white">
+          <path fillRule="evenodd" clipRule="evenodd" d="M1 1h5v1.5H2.5V5H1V1zm9 0h5v4h-1.5V2.5H10V1zM1 10h1.5v2.5H5V14H1v-4zm11.5 2.5V10H14v4h-4v-1.5h2.5z"/>
+        </svg>
+      </button>
+    </div>
+  )
+}
+
+// ── Image Slider ──────────────────────────────────────────────────────────────
+function ImageSlider({ images, colors }: { images: { src: string; alt: string }[]; colors: C }) {
+  const [current, setCurrent] = useState(0)
+
+  return (
+    <div style={{ borderRadius: 12, overflow: "hidden", background: colors.border, position: "relative", aspectRatio: "4/3" }}>
+      <AnimatePresence mode="wait">
+        <motion.img
+          key={current}
+          src={images[current].src}
+          alt={images[current].alt}
+          initial={{ opacity: 0 }}
+          animate={{ opacity: 1 }}
+          exit={{ opacity: 0 }}
+          transition={{ duration: 0.25 }}
+          style={{ position: "absolute", inset: 0, width: "100%", height: "100%", objectFit: "cover", display: "block" }}
+        />
+      </AnimatePresence>
+
+      {/* Counter badge */}
+      <div style={{ position: "absolute", top: 10, right: 10, background: "rgba(0,0,0,0.55)", color: "#fff", fontFamily: "Arial, sans-serif", fontSize: 10, padding: "3px 8px", borderRadius: 20, zIndex: 2 }}>
+        {current + 1} / {images.length}
+      </div>
+
+      {/* Prev */}
+      <button
+        onClick={() => setCurrent(c => Math.max(0, c - 1))}
+        disabled={current === 0}
+        style={{ position: "absolute", left: 10, top: "50%", transform: "translateY(-50%)", zIndex: 2, background: "rgba(255,255,255,0.92)", border: "none", borderRadius: "50%", width: 36, height: 36, cursor: current === 0 ? "not-allowed" : "pointer", opacity: current === 0 ? 0.3 : 1, display: "flex", alignItems: "center", justifyContent: "center", fontSize: 15, fontFamily: "Arial, sans-serif" }}
+      >←</button>
+
+      {/* Next */}
+      <button
+        onClick={() => setCurrent(c => Math.min(images.length - 1, c + 1))}
+        disabled={current === images.length - 1}
+        style={{ position: "absolute", right: 10, top: "50%", transform: "translateY(-50%)", zIndex: 2, background: "rgba(255,255,255,0.92)", border: "none", borderRadius: "50%", width: 36, height: 36, cursor: current === images.length - 1 ? "not-allowed" : "pointer", opacity: current === images.length - 1 ? 0.3 : 1, display: "flex", alignItems: "center", justifyContent: "center", fontSize: 15, fontFamily: "Arial, sans-serif" }}
+      >→</button>
+
+      {/* Dot indicators */}
+      <div style={{ position: "absolute", bottom: 10, left: "50%", transform: "translateX(-50%)", display: "flex", gap: 6, zIndex: 2 }}>
+        {images.map((_, i) => (
+          <button
+            key={i}
+            onClick={() => setCurrent(i)}
+            style={{ width: i === current ? 18 : 6, height: 6, borderRadius: 3, background: i === current ? "#fff" : "rgba(255,255,255,0.5)", border: "none", cursor: "pointer", padding: 0, transition: "all 0.2s" }}
+          />
+        ))}
+      </div>
+    </div>
+  )
+}
+
+// ── Goals Table ───────────────────────────────────────────────────────────────
+function GoalsTable({ colors }: { colors: C }) {
+  const rows = [
+    { goal: "Reduce Physical Strain", criteria: "Reduction in Physical Effort (measured via force gauge or user survey)" },
+    { goal: "Improve Bed-Making Efficiency", criteria: "Time Reduction in Bed-Making (target: >30% time saved)" },
+    { goal: "Enhance User Convenience & Adoption", criteria: "User Satisfaction & Adoption Rate (target: >70% positive feedback)" },
+  ]
+  return (
+    <div style={{ margin: "32px 0 0", border: `1px solid ${colors.border}`, borderRadius: 10, overflow: "hidden" }}>
+      {/* Header */}
+      <div style={{ display: "grid", gridTemplateColumns: "1fr 1fr", background: colors.surface }}>
+        {["Primary Goals", "Success Criteria"].map(h => (
+          <div key={h} style={{ padding: "12px 18px", fontFamily: "Arial, sans-serif", fontSize: 9, letterSpacing: "2px", textTransform: "uppercase", color: colors.primary, borderBottom: `1px solid ${colors.border}` }}>
+            {h}
+          </div>
+        ))}
+      </div>
+      {/* Rows */}
+      {rows.map(({ goal, criteria }, i) => (
+        <div key={i} style={{ display: "grid", gridTemplateColumns: "1fr 1fr", borderBottom: i < rows.length - 1 ? `1px solid ${colors.border}` : "none" }}>
+          <div style={{ padding: "14px 18px", fontFamily: "Georgia, serif", fontSize: 14, color: colors.text, fontWeight: 600, borderRight: `1px solid ${colors.border}` }}>{goal}</div>
+          <div style={{ padding: "14px 18px", fontFamily: "Georgia, serif", fontSize: 14, color: colors.muted }}>{criteria}</div>
+        </div>
+      ))}
+    </div>
+  )
+}
+
+// ── Step label ────────────────────────────────────────────────────────────────
+function StepLabel({ step, title, colors }: { step: string; title: string; colors: C }) {
+  return (
+    <div style={{ marginBottom: 32 }}>
+      <div style={{ fontFamily: "Arial, sans-serif", fontSize: 9, letterSpacing: "2px", textTransform: "uppercase", color: colors.primary, marginBottom: 8 }}>{step}</div>
+      <h3 style={{ fontFamily: "Georgia, serif", fontSize: 24, fontWeight: 700, color: colors.text, margin: 0 }}>{title}</h3>
+    </div>
+  )
+}
+
+// ── Divider ───────────────────────────────────────────────────────────────────
+function Divider({ colors }: { colors: C }) {
+  return <div style={{ height: 1, background: colors.border, margin: "72px 0" }} />
+}
+
+// ─────────────────────────────────────────────────────────────────────────────
 export default function LiftyPage() {
   const { C } = useContext(ThemeContext)
 
+  const researchImages = [
+    { src: "/lifty/research-1.jpg", alt: "Research photo 1" },
+    { src: "/lifty/research-2.jpg", alt: "Research photo 2" },
+    { src: "/lifty/research-3.png", alt: "Research diagram" },
+    { src: "/lifty/research-4.png", alt: "Research findings" },
+  ]
+
+  const cadImages = [
+    { src: "/lifty/cad-1.png", alt: "CAD view 1" },
+    { src: "/lifty/cad-2.png", alt: "CAD view 2" },
+    { src: "/lifty/cad-3.png", alt: "CAD view 3" },
+    { src: "/lifty/cad-4.png", alt: "CAD view 4" },
+  ]
+
   return (
     <div style={{ background: C.bg, minHeight: "100vh", color: C.text }}>
-      {/* ── Top bar ── */}
+
+      {/* ── Sticky nav bar ── */}
       <div style={{ position: "sticky", top: 0, zIndex: 50, backdropFilter: "blur(12px)", backgroundColor: C.navBg, borderBottom: `1px solid ${C.border}`, padding: "16px 40px" }}>
-        <Link
-          to="/"
-          style={{ fontFamily: "Arial, sans-serif", fontSize: 11, letterSpacing: "1px", textTransform: "uppercase", color: C.muted, textDecoration: "none", display: "inline-flex", alignItems: "center", gap: 6 }}
-        >
+        <Link to="/" style={{ fontFamily: "Arial, sans-serif", fontSize: 11, letterSpacing: "1px", textTransform: "uppercase", color: C.muted, textDecoration: "none" }}>
           ← Back
         </Link>
       </div>
 
-      {/* ── Hero image ── */}
-      <div style={{ width: "100%", height: "60vh", overflow: "hidden", background: C.border }}>
-        <motion.img
-          src="https://images.unsplash.com/photo-1485827404703-89b55fcc595e?w=1400&q=85"
-          alt="Lifty robot"
-          initial={{ scale: 1.06 }}
-          animate={{ scale: 1 }}
-          transition={{ duration: 1.2, ease: "easeOut" }}
-          style={{ width: "100%", height: "100%", objectFit: "cover", display: "block" }}
-        />
-      </div>
+      {/* ── Hero video ── */}
+      <VideoHero />
 
       {/* ── Header ── */}
       <div style={{ maxWidth: 860, margin: "0 auto", padding: "60px 40px 0" }}>
@@ -87,20 +198,25 @@ export default function LiftyPage() {
           <h1 style={{ fontFamily: "Georgia, serif", fontSize: "clamp(36px, 6vw, 64px)", fontWeight: 700, color: C.text, margin: "0 0 12px", lineHeight: 1.1 }}>
             Lifty
           </h1>
-          <p style={{ fontFamily: "Georgia, serif", fontSize: 15, color: C.muted, margin: "0 0 40px" }}>
+          <p style={{ fontFamily: "Georgia, serif", fontSize: 15, color: C.muted, margin: "0 0 32px" }}>
             SUTD × LionsBot International
           </p>
-          <p style={{ fontFamily: "Georgia, serif", fontSize: 16, color: C.muted, lineHeight: 1.9, maxWidth: 680, margin: "0 0 80px" }}>
-            Lifty is an autonomous cleaning robot designed to feel like a campus companion rather than a piece of industrial equipment. Working alongside LionsBot International — Singapore's leading commercial cleaning robot manufacturer — the goal was to redesign the human-facing shell and interaction model of an existing platform so it could operate confidently in SUTD's human-dense corridors.
+
+          {/* Overview */}
+          <p style={{ fontFamily: "Georgia, serif", fontSize: 16, color: C.muted, lineHeight: 1.9, maxWidth: 720, margin: "0 0 0" }}>
+            LIFTY is an assistive bed-making device developed by Team 2 for LionsBot International Pte Ltd as part of the Product Design Studio 2026 module. The device aims to automate and assist in the bed-making process, reducing physical strain on users and improving efficiency in hospital or hospitality settings.
           </p>
+
+          {/* Goals table */}
+          <GoalsTable colors={C} />
         </FadeUp>
 
         {/* ── Metadata row ── */}
         <FadeUp delay={0.1}>
-          <div style={{ display: "grid", gridTemplateColumns: "repeat(auto-fit, minmax(160px, 1fr))", gap: 32, paddingBottom: 60, borderBottom: `1px solid ${C.border}`, marginBottom: 80 }}>
+          <div style={{ display: "grid", gridTemplateColumns: "repeat(auto-fit, minmax(160px, 1fr))", gap: 32, paddingTop: 56, paddingBottom: 60, borderBottom: `1px solid ${C.border}`, marginBottom: 80 }}>
             {[
               { label: "Role", value: "Product Designer" },
-              { label: "Team", value: "SUTD Design Team × LionsBot Eng." },
+              { label: "Team", value: "SUTD Team 2 × LionsBot Eng." },
               { label: "Tools", value: "Fusion 360 · Figma · Arduino" },
               { label: "Duration", value: "Jan – Apr 2026" },
             ].map(({ label, value }) => (
@@ -117,43 +233,151 @@ export default function LiftyPage() {
       <div style={{ maxWidth: 860, margin: "0 auto", padding: "0 40px 120px" }}>
         <FadeUp>
           <div style={{ fontFamily: "Arial, sans-serif", fontSize: 9, letterSpacing: "3px", textTransform: "uppercase", color: C.primary, marginBottom: 12 }}>Process</div>
-          <h2 style={{ fontFamily: "Georgia, serif", fontSize: 28, fontWeight: 700, color: C.text, margin: "0 0 64px" }}>How it was made</h2>
+          <h2 style={{ fontFamily: "Georgia, serif", fontSize: 28, fontWeight: 700, color: C.text, margin: "0 0 72px" }}>How it was made</h2>
         </FadeUp>
 
-        <div style={{ display: "flex", flexDirection: "column", gap: 100 }}>
-          {PROCESS_STEPS.map((step, i) => (
-            <FadeUp key={step.step} delay={0.05}>
-              <div style={{ display: "grid", gridTemplateColumns: i % 2 === 0 ? "1fr 1fr" : "1fr 1fr", gap: 48, alignItems: "center" }}>
-                {/* Text — alternates left/right */}
-                <div style={{ order: i % 2 === 0 ? 0 : 1 }}>
-                  <div style={{ fontFamily: "Arial, sans-serif", fontSize: 11, letterSpacing: "1px", color: C.primary, marginBottom: 12 }}>{step.step}</div>
-                  <h3 style={{ fontFamily: "Georgia, serif", fontSize: 22, fontWeight: 700, color: C.text, margin: "0 0 16px" }}>{step.title}</h3>
-                  <p style={{ fontFamily: "Georgia, serif", fontSize: 15, color: C.muted, lineHeight: 1.85, margin: 0 }}>{step.description}</p>
-                </div>
-                {/* Image */}
-                <div style={{ order: i % 2 === 0 ? 1 : 0, borderRadius: 12, overflow: "hidden", aspectRatio: "4/3", background: C.border }}>
-                  <motion.img
-                    src={step.image}
-                    alt={step.alt}
-                    initial={{ scale: 1.04 }}
-                    whileInView={{ scale: 1 }}
-                    viewport={{ once: true }}
-                    transition={{ duration: 0.8, ease: "easeOut" }}
-                    style={{ width: "100%", height: "100%", objectFit: "cover", display: "block" }}
-                  />
-                </div>
+        {/* ── 01 Research & Discovery ── */}
+        <FadeUp>
+          <StepLabel step="01" title="Research & Discovery" colors={C} />
+          <div style={{ display: "grid", gridTemplateColumns: "1fr 1fr", gap: 48, alignItems: "start" }}>
+            {/* Text */}
+            <div>
+              {/* Rajesh persona */}
+              <div style={{ background: C.surface, border: `1px solid ${C.border}`, borderRadius: 10, padding: "20px 22px", marginBottom: 24 }}>
+                <div style={{ fontFamily: "Arial, sans-serif", fontSize: 9, letterSpacing: "2px", textTransform: "uppercase", color: C.primary, marginBottom: 10 }}>User Persona</div>
+                <div style={{ fontFamily: "Georgia, serif", fontSize: 15, fontWeight: 700, color: C.text, marginBottom: 2 }}>Rajesh, 45</div>
+                <div style={{ fontFamily: "Arial, sans-serif", fontSize: 11, color: C.muted, marginBottom: 14 }}>Hotel Housekeeping Staff · Royce Residences</div>
+                <p style={{ fontFamily: "Georgia, serif", fontSize: 13, color: C.muted, lineHeight: 1.8, margin: "0 0 14px" }}>
+                  Rajesh is an experienced housekeeping staff member who cleans rooms, changes bed linens, and maintains room quality under tight turnaround schedules. He experiences frequent back and knee pain from repetitive bending, finds tucking sheets and lifting mattress corners physically exhausting, and often works overtime due to understaffing.
+                </p>
+                <p style={{ fontFamily: "Georgia, serif", fontSize: 13, color: C.muted, fontStyle: "italic", borderLeft: `3px solid ${C.primary}`, paddingLeft: 12, margin: 0 }}>
+                  "Bending over and tucking in bed sheets is very tiring… I also have to overtime when there's not enough manpower."
+                </p>
               </div>
-            </FadeUp>
-          ))}
-        </div>
+
+              {/* Stats */}
+              <p style={{ fontFamily: "Georgia, serif", fontSize: 14, color: C.muted, lineHeight: 1.85, margin: "0 0 16px" }}>
+                Bed-making is physically demanding — involving constant bending, lifting and tucking. Housekeepers perform <strong>250–600 bends</strong> and <strong>70–200 mattress lifts per day</strong>, clean 12–20 rooms, and walk 8–16 km per shift. Trunk flexion analysis shows bending past 90° is common, placing workers at very high risk of back injury. Up to <strong>70% of housekeepers</strong> develop musculoskeletal disorders. Lifting forces can reach 2,000–6,000 N per lift, accumulating to an estimated <strong>960,000 N/day</strong> on the lower back — equivalent to the weight of 20 adult elephants.
+              </p>
+
+              <div style={{ display: "flex", flexDirection: "column", gap: 8 }}>
+                {[
+                  "Tasks are time-sensitive (20–40 mins per room) with pressure from guest turnover",
+                  "Workflow is interrupted by guests returning, causing rushed work",
+                  "High physical workload with low efficiency under time pressure",
+                  "Need for modular and deployable solutions",
+                ].map((point, i) => (
+                  <div key={i} style={{ display: "flex", gap: 10, alignItems: "flex-start" }}>
+                    <span style={{ color: C.primary, fontFamily: "Arial, sans-serif", fontSize: 12, marginTop: 2, flexShrink: 0 }}>→</span>
+                    <span style={{ fontFamily: "Georgia, serif", fontSize: 13, color: C.muted, lineHeight: 1.7 }}>{point}</span>
+                  </div>
+                ))}
+              </div>
+            </div>
+
+            {/* Slider */}
+            <ImageSlider images={researchImages} colors={C} />
+          </div>
+        </FadeUp>
+
+        <Divider colors={C} />
+
+        {/* ── 02 Ideation & CADding ── */}
+        <FadeUp>
+          <StepLabel step="02" title="Ideation & CADding" colors={C} />
+          <div style={{ display: "grid", gridTemplateColumns: "1fr 1fr", gap: 48, alignItems: "start" }}>
+            {/* Slider first (alternates side) */}
+            <ImageSlider images={cadImages} colors={C} />
+
+            {/* Text */}
+            <div>
+              <p style={{ fontFamily: "Georgia, serif", fontSize: 14, color: C.muted, lineHeight: 1.85, margin: "0 0 20px" }}>
+                With the core mechanics defined, every assembly was built in Fusion 360 to millimetre precision. The design process was driven not just by aesthetics, but by the physical reality of fitting motors, drivers, and wiring into a compact chassis.
+              </p>
+              <p style={{ fontFamily: "Georgia, serif", fontSize: 14, color: C.muted, lineHeight: 1.85, margin: "0 0 20px" }}>
+                Battery placement was the first major constraint — the pack needed to sit low for centre-of-gravity stability while leaving clearance for the motor drivers and main controller board. A worm-gear drivetrain was selected for its self-locking property, preventing back-drive when the actuator is unpowered, and sized against the measured sheet-tucking force requirements.
+              </p>
+              <p style={{ fontFamily: "Georgia, serif", fontSize: 14, color: C.muted, lineHeight: 1.85, margin: "0 0 20px" }}>
+                Every cable run, motor driver mounting hole, and connector clearance was modelled explicitly in 3D — only by building the full wiring schematic into the CAD could we verify that the PCB stack, motor harness, and power bus would all fit within the chassis depth without interference.
+              </p>
+              <div style={{ display: "flex", flexDirection: "column", gap: 8 }}>
+                {[
+                  "Battery & power distribution layout",
+                  "DC motor & worm gear placement",
+                  "Motor driver PCB mounting",
+                  "Wiring harness routing & clearances",
+                  "Full wiring schematic in 3D",
+                ].map((item, i) => (
+                  <div key={i} style={{ display: "flex", gap: 10, alignItems: "center" }}>
+                    <span style={{ width: 6, height: 6, borderRadius: "50%", background: C.primary, flexShrink: 0 }} />
+                    <span style={{ fontFamily: "Arial, sans-serif", fontSize: 12, color: C.muted }}>{item}</span>
+                  </div>
+                ))}
+              </div>
+            </div>
+          </div>
+        </FadeUp>
+
+        <Divider colors={C} />
+
+        {/* ── 03 Prototyping & Electrical ── */}
+        <FadeUp>
+          <StepLabel step="03" title="Prototyping & Electrical" colors={C} />
+          <div style={{ display: "grid", gridTemplateColumns: "1fr 1fr", gap: 48, alignItems: "start" }}>
+            <div>
+              <p style={{ fontFamily: "Georgia, serif", fontSize: 14, color: C.muted, lineHeight: 1.85, margin: "0 0 20px" }}>
+                Modelled components were brought into physical reality through FDM 3D printing and CNC-cut sheet metal, with each sub-assembly tested independently before integration. The electrical system was breadboarded first to validate motor driver logic, then migrated to a custom PCB layout for the final build.
+              </p>
+              <p style={{ fontFamily: "Georgia, serif", fontSize: 14, color: C.muted, lineHeight: 1.85, margin: 0 }}>
+                Firmware running on the microcontroller managed PWM speed control, limit-switch debouncing, and a simple state machine for the tucking sequence — ensuring repeatable, safe operation across different mattress heights and sheet thicknesses.
+              </p>
+            </div>
+            <div style={{ borderRadius: 12, overflow: "hidden", aspectRatio: "4/3", background: C.border }}>
+              <motion.img
+                src="https://images.unsplash.com/photo-1518770660439-4636190af475?w=900&q=80"
+                alt="Electronics prototyping"
+                initial={{ scale: 1.04 }}
+                whileInView={{ scale: 1 }}
+                viewport={{ once: true }}
+                transition={{ duration: 0.8, ease: "easeOut" }}
+                style={{ width: "100%", height: "100%", objectFit: "cover", display: "block" }}
+              />
+            </div>
+          </div>
+        </FadeUp>
+
+        <Divider colors={C} />
+
+        {/* ── 04 Testing & Iteration ── */}
+        <FadeUp>
+          <StepLabel step="04" title="Testing & Iteration" colors={C} />
+          <div style={{ display: "grid", gridTemplateColumns: "1fr 1fr", gap: 48, alignItems: "start" }}>
+            <div style={{ borderRadius: 12, overflow: "hidden", aspectRatio: "4/3", background: C.border }}>
+              <motion.img
+                src="https://images.unsplash.com/photo-1485827404703-89b55fcc595e?w=900&q=80"
+                alt="Testing the prototype"
+                initial={{ scale: 1.04 }}
+                whileInView={{ scale: 1 }}
+                viewport={{ once: true }}
+                transition={{ duration: 0.8, ease: "easeOut" }}
+                style={{ width: "100%", height: "100%", objectFit: "cover", display: "block" }}
+              />
+            </div>
+            <div>
+              <p style={{ fontFamily: "Georgia, serif", fontSize: 14, color: C.muted, lineHeight: 1.85, margin: "0 0 20px" }}>
+                The assembled prototype was tested with hotel housekeeping staff to measure time savings and physical effort reduction against the baseline. Force gauge readings confirmed a significant reduction in peak lifting force, while timed trials across 10 bed-making cycles showed consistent performance.
+              </p>
+              <p style={{ fontFamily: "Georgia, serif", fontSize: 14, color: C.muted, lineHeight: 1.85, margin: 0 }}>
+                Feedback from users drove two mechanical revisions — tightening the sheet-grip clamping force and adjusting the tucking path depth to accommodate thicker mattresses. Final user satisfaction scored above the 70% positive-feedback target set at the project outset.
+              </p>
+            </div>
+          </div>
+        </FadeUp>
       </div>
 
       {/* ── Footer nav ── */}
       <div style={{ borderTop: `1px solid ${C.border}`, padding: "40px", textAlign: "center" }}>
-        <Link
-          to="/"
-          style={{ fontFamily: "Arial, sans-serif", fontSize: 11, letterSpacing: "1px", textTransform: "uppercase", color: C.muted, textDecoration: "none" }}
-        >
+        <Link to="/" style={{ fontFamily: "Arial, sans-serif", fontSize: 11, letterSpacing: "1px", textTransform: "uppercase", color: C.muted, textDecoration: "none" }}>
           ← Back to portfolio
         </Link>
       </div>
