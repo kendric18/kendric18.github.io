@@ -229,6 +229,13 @@ export default function LiftyPage() {
     { src: "/lifty/cad-4.png", alt: "CAD view 4" },
   ]
 
+  const protoImages = [
+    { src: "/lifty/proto-1.png", alt: "3D printed slider variation 1" },
+    { src: "/lifty/proto-2.png", alt: "3D printed slider variation 2" },
+    { src: "/lifty/proto-3.png", alt: "3D printed slider variation 3" },
+    { src: "/lifty/proto-4.jpg", alt: "Hands-on electrical wiring" },
+  ]
+
   const researchPoints = [
     "Tasks are time-sensitive (20–40 mins per room) with pressure from guest turnover",
     "Workflow is interrupted by guests returning, causing rushed work",
@@ -382,15 +389,31 @@ export default function LiftyPage() {
         <FadeUp>
           <StepLabel step="03" title="Prototyping & Electrical" colors={C} />
           <div style={{ display: "grid", gridTemplateColumns: "1fr 1fr", gap: 48, alignItems: "start" }}>
+            {/* Slider */}
+            <ImageSlider images={protoImages} colors={C} />
+
+            {/* Text */}
             <div>
               <p style={{ fontFamily: "Georgia, serif", fontSize: 14, color: C.muted, lineHeight: 1.85, margin: "0 0 20px" }}>
-                Modelled components were brought into physical reality through FDM 3D printing and CNC-cut sheet metal, with each sub-assembly tested independently before integration. The electrical system was breadboarded first to validate motor driver logic, then migrated to a custom PCB layout for the final build.
+                One of the most iterative parts of the build was the sheet-tucker mechanism. We 3D printed many variations of the slider geometry — tweaking the angle, lip depth, and surface profile — to find the shape that could reliably tuck a bedsheet under a mattress without bunching or slipping.
               </p>
-              <p style={{ fontFamily: "Georgia, serif", fontSize: 14, color: C.muted, lineHeight: 1.85, margin: 0 }}>
-                Firmware running on the microcontroller managed PWM speed control, limit-switch debouncing, and a simple state machine for the tucking sequence — ensuring repeatable, safe operation across different mattress heights and sheet thicknesses.
+              <p style={{ fontFamily: "Georgia, serif", fontSize: 14, color: C.muted, lineHeight: 1.85, margin: "0 0 20px" }}>
+                On the electrical side, I was responsible for the full wiring architecture: designing the schematics, planning the circuit layout, and thinking through how power would be distributed across the motor drivers, microcontroller, and sensors. I then built it hands-on — soldering connections, routing cables through the chassis, and verifying each sub-circuit before integration.
               </p>
+              <div style={{ display: "flex", flexDirection: "column", gap: 8 }}>
+                {[
+                  "Multiple 3D-printed slider iterations tested for tuck reliability",
+                  "Electrical schematic design and circuit planning",
+                  "Hands-on wiring: soldering, cable routing, and sub-circuit testing",
+                  "Motor driver and power distribution layout",
+                ].map((item, i) => (
+                  <div key={i} style={{ display: "flex", gap: 10, alignItems: "center" }}>
+                    <span style={{ width: 6, height: 6, borderRadius: "50%", background: C.primary, flexShrink: 0 }} />
+                    <span style={{ fontFamily: "Arial, sans-serif", fontSize: 12, color: C.muted }}>{item}</span>
+                  </div>
+                ))}
+              </div>
             </div>
-            <PhotoBlock src="https://images.unsplash.com/photo-1518770660439-4636190af475?w=900&q=80" alt="Electronics prototyping" />
           </div>
         </FadeUp>
 
