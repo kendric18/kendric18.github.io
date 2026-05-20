@@ -253,7 +253,7 @@ function Hero() {
       id="home"
       style={{
         minHeight: "100vh",
-        background: C.bg,
+        background: "transparent",
         display: "flex",
         flexDirection: "column",
         alignItems: "center",
@@ -263,8 +263,6 @@ function Hero() {
         position: "relative",
       }}
     >
-      <ShaderAnimation />
-
       <div style={{ position: "relative", zIndex: 1, display: "flex", flexDirection: "column", alignItems: "center" }}>
         <motion.div
           initial={{ opacity: 0, scale: 0.85 }}
@@ -344,7 +342,7 @@ function About() {
     <section
       id="about"
       style={{
-        background: C.surface,
+        background: "rgba(249,244,238,0.82)",
         padding: "80px 40px",
         borderTop: `1px solid ${C.border}`,
       }}
@@ -530,7 +528,7 @@ function Projects() {
     <section
       id="projects"
       style={{
-        background: C.surface,
+        background: "rgba(249,244,238,0.82)",
         padding: "80px 40px",
         borderTop: `1px solid ${C.border}`,
       }}
@@ -574,7 +572,7 @@ function Skills() {
     <section
       id="experience"
       style={{
-        background: C.surface,
+        background: "rgba(249,244,238,0.82)",
         padding: "80px 40px",
         borderTop: `1px solid ${C.border}`,
       }}
@@ -782,8 +780,10 @@ export default function App() {
         background: C.bg,
         minHeight: "100vh",
         overflowX: "hidden",
+        position: "relative",
       }}
     >
+      <ShaderAnimation />
       <Nav />
       <Hero />
       <About />
