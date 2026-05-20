@@ -262,54 +262,49 @@ function Hero() {
         position: "relative",
       }}
     >
-      <div style={{ position: "relative", display: "inline-block" }}>
-        <h1
+      <motion.div
+        initial={{ opacity: 0, scale: 0.85 }}
+        animate={{ opacity: 1, scale: 1 }}
+        transition={{ delay: 0.2, duration: 0.5, ease: "backOut" }}
+        style={{
+          width: 110,
+          height: 150,
+          borderRadius: 9999,
+          overflow: "hidden",
+          border: `3px solid ${C.bg}`,
+          boxShadow: "0 8px 32px rgba(0,0,0,0.18)",
+          marginBottom: 28,
+        }}
+      >
+        <img
+          src={PHOTO_URL}
+          alt="Kendric"
           style={{
-            fontFamily: "'Arial Black', 'Helvetica Neue', sans-serif",
-            fontWeight: 900,
-            fontSize: "clamp(64px, 14vw, 148px)",
-            color: C.accent,
-            letterSpacing: "-4px",
-            lineHeight: 0.9,
-            textTransform: "uppercase",
-            userSelect: "none",
-            margin: 0,
+            width: "100%",
+            height: "100%",
+            objectFit: "cover",
+            objectPosition: "center 15%",
+            display: "block",
           }}
-        >
-          <BlurText text="KENDRIC" />
-        </h1>
+        />
+      </motion.div>
 
-        <motion.div
-          initial={{ opacity: 0, scale: 0.85 }}
-          animate={{ opacity: 1, scale: 1 }}
-          transition={{ delay: 0.6, duration: 0.5, ease: "backOut" }}
-          style={{
-            position: "absolute",
-            top: "50%",
-            left: "50%",
-            transform: "translate(-50%, -50%)",
-            width: 90,
-            height: 150,
-            borderRadius: 9999,
-            overflow: "hidden",
-            border: `3px solid ${C.bg}`,
-            boxShadow: "0 8px 32px rgba(0,0,0,0.18)",
-            zIndex: 10,
-          }}
-        >
-          <img
-            src={PHOTO_URL}
-            alt="Kendric"
-            style={{
-              width: "100%",
-              height: "100%",
-              objectFit: "cover",
-              objectPosition: "center top",
-              display: "block",
-            }}
-          />
-        </motion.div>
-      </div>
+      <h1
+        style={{
+          fontFamily: "'Arial Black', 'Helvetica Neue', sans-serif",
+          fontWeight: 900,
+          fontSize: "clamp(64px, 14vw, 148px)",
+          color: C.accent,
+          letterSpacing: "-4px",
+          lineHeight: 0.9,
+          textTransform: "uppercase",
+          userSelect: "none",
+          margin: 0,
+          textAlign: "center",
+        }}
+      >
+        <BlurText text="KENDRIC" />
+      </h1>
 
       <motion.p
         initial={{ opacity: 0 }}
