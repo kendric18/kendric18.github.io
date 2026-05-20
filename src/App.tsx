@@ -342,7 +342,7 @@ function About() {
     <section
       id="about"
       style={{
-        background: "rgba(249,244,238,0.82)",
+        background: "rgba(249,244,238,0.72)",
         padding: "80px 40px",
         borderTop: `1px solid ${C.border}`,
       }}
@@ -528,7 +528,7 @@ function Projects() {
     <section
       id="projects"
       style={{
-        background: "rgba(249,244,238,0.82)",
+        background: "rgba(249,244,238,0.72)",
         padding: "80px 40px",
         borderTop: `1px solid ${C.border}`,
       }}
@@ -572,7 +572,7 @@ function Skills() {
     <section
       id="experience"
       style={{
-        background: "rgba(249,244,238,0.82)",
+        background: "rgba(249,244,238,0.72)",
         padding: "80px 40px",
         borderTop: `1px solid ${C.border}`,
       }}
@@ -777,10 +777,11 @@ export default function App() {
     <div
       style={{
         fontFamily: "Georgia, serif",
-        background: C.bg,
+        background: "transparent",
         minHeight: "100vh",
         overflowX: "hidden",
         position: "relative",
+        zIndex: 1,
       }}
     >
       <ShaderAnimation />

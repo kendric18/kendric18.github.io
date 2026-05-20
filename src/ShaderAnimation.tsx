@@ -45,7 +45,7 @@ export function ShaderAnimation() {
 
         // Cream background #F5F5F0 = vec3(0.961, 0.961, 0.941)
         vec3 bg = vec3(0.961, 0.961, 0.941);
-        vec3 final = bg - color * 0.12;
+        vec3 final = bg - color * 0.08;
         gl_FragColor = vec4(clamp(final, 0.0, 1.0), 1.0);
       }
     `
