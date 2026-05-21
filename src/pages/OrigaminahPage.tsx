@@ -343,8 +343,11 @@ export default function OrigaminahPage() {
               <p style={{ fontFamily: "Georgia, serif", fontSize: 14, color: C.muted, lineHeight: 1.85, margin: "0 0 20px" }}>
                 The prototype was built at full 1:1 scale — a deliberate choice to test how the origami-folded panels actually behaved at human height and in a real spatial context. Building at true scale immediately exposed issues that a scaled-down model would have hidden: panel rigidity, reflective surface performance under ambient light, and how the installation read from a diner's seated eye level.
               </p>
-              <p style={{ fontFamily: "Georgia, serif", fontSize: 14, color: C.muted, lineHeight: 1.85, margin: 0 }}>
+              <p style={{ fontFamily: "Georgia, serif", fontSize: 14, color: C.muted, lineHeight: 1.85, margin: "0 0 20px" }}>
                 Testing at 1:1 confirmed that the reflective panels effectively scattered light and disrupted bird approach paths, while remaining visually unobtrusive to diners. The fold geometry held its form without additional support, validating the structural logic of the origami mechanism.
+              </p>
+              <p style={{ fontFamily: "Georgia, serif", fontSize: 14, color: C.primary, lineHeight: 1.85, margin: 0, fontWeight: 600 }}>
+                Origaminah was awarded the Sustainability Practice Prize.
               </p>
             </div>
             <ImageSlider images={outcomeImages} colors={C} />
@@ -371,6 +374,11 @@ export default function OrigaminahPage() {
           <div style={{ display: "grid", gridTemplateColumns: "1fr 1fr", gap: 20, marginTop: 20 }}>
             <PhotoBlock src="/Origaminah/photo_2026-05-21_13-23-59.jpg" alt="Origaminah photo 3" />
             <PhotoBlock src="/Origaminah/photo_2026-05-21_13-24-30.jpg" alt="Origaminah photo 4" />
+          </div>
+        </FadeUp>
+        <FadeUp delay={0.2}>
+          <div style={{ marginTop: 20 }}>
+            <PhotoBlock src="/Origaminah/Screenshot%202026-05-21%20132247.png" alt="Sustainability Practice Prize" contain />
           </div>
         </FadeUp>
       </div>
