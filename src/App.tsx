@@ -7,6 +7,7 @@ import { Scroller } from "@/components/ui/scroller-1"
 import LiftyPage from "./pages/LiftyPage"
 import OrigaminahPage from "./pages/OrigaminahPage"
 import VisualisationPage from "./pages/VisualisationPage"
+import MiniAppsPage from "./pages/MiniAppsPage"
 
 // ─── COLOUR TOKENS ────────────────────────────────────────────────────────────
 const LIGHT = {
@@ -48,7 +49,7 @@ const PROJECTS = [
   { id: "lifty", category: "Product Design · Hardware", title: "Lifty", subtitle: "SUTD × LionsBot International", image: "/lifty/lifty-card.jpg", link: "/projects/lifty" },
   { id: "project-2", category: "Design Thinking and Innovation", title: "Origaminah", subtitle: "SUTD Studio project", image: "/Origaminah/Problem%20Staments.png", link: "/projects/origaminah" },
   { id: "project-3", category: "Interior Design · 3D Drafting", title: "3D Visualisation", subtitle: "The Wood Creation · Edgeline Planners", image: "/3D%20Visualisation/WhatsApp%20Image%202024-04-18%20at%2012.51.04%20PM-%E5%AE%A2%E5%8E%85-20260521-000918.jpg", link: "/projects/3d-visualisation" },
-  { id: "project-4", category: "Vibe Coded · Personal Projects", title: "Mini Apps", subtitle: "Personal vibe-coded projects", image: "/personal-projects/Screenshot%202026-05-21%20153219.png", link: "#" },
+  { id: "project-4", category: "Vibe Coded · Personal Projects", title: "Mini Apps", subtitle: "Personal vibe-coded projects", image: "/personal-projects/Screenshot%202026-05-21%20153219.png", link: "/projects/mini-apps" },
 ]
 
 const SKILLS = ["Product Design", "UX Research", "Figma / Framer", "Python / C++", "CAD / Fusion 360", "AutoCAD", "Electronics / Arduino", "AI / ML"]
@@ -409,6 +410,7 @@ export default function App() {
         <Route path="/projects/lifty" element={<LiftyPage />} />
         <Route path="/projects/origaminah" element={<OrigaminahPage />} />
         <Route path="/projects/3d-visualisation" element={<VisualisationPage />} />
+        <Route path="/projects/mini-apps" element={<MiniAppsPage />} />
       </Routes>
     </ThemeContext.Provider>
   )
