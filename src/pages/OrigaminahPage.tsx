@@ -175,9 +175,8 @@ export default function OrigaminahPage() {
   ]
 
   const outcomeImages = [
-    { src: "/Origaminah/photo_2026-05-21_13-24-56.jpg", alt: "Origaminah outcome 1" },
-    { src: "/Origaminah/photo_2026-05-21_13-24-59.jpg", alt: "Origaminah outcome 2" },
-    { src: "/Origaminah/Problem%20Staments.png", alt: "Problem statements" },
+    { src: "/Origaminah/photo_2026-05-21_13-24-30.jpg", alt: "1:1 scale prototype" },
+    { src: "/Origaminah/Problem%20Staments.png", alt: "Prototype documentation" },
   ]
 
   return (
@@ -342,10 +341,10 @@ export default function OrigaminahPage() {
           <div style={{ display: "grid", gridTemplateColumns: "1fr 1fr", gap: 48, alignItems: "start" }}>
             <div>
               <p style={{ fontFamily: "Georgia, serif", fontSize: 14, color: C.muted, lineHeight: 1.85, margin: "0 0 20px" }}>
-                Physical prototypes were built at 1:20 scale using card stock and laser-cut acrylic panels to test the folding mechanisms and spatial configurations. User testing sessions revealed how intuitively people could reconfigure the system, and what friction points existed in the assembly logic.
+                The prototype was built at full 1:1 scale — a deliberate choice to test how the origami-folded panels actually behaved at human height and in a real spatial context. Building at true scale immediately exposed issues that a scaled-down model would have hidden: panel rigidity, reflective surface performance under ambient light, and how the installation read from a diner's seated eye level.
               </p>
               <p style={{ fontFamily: "Georgia, serif", fontSize: 14, color: C.muted, lineHeight: 1.85, margin: 0 }}>
-                Iterations refined the connector geometry, improved the panel locking mechanism, and optimised the minimum unit size to ensure the system remained portable and practical for real-world deployment.
+                Testing at 1:1 confirmed that the reflective panels effectively scattered light and disrupted bird approach paths, while remaining visually unobtrusive to diners. The fold geometry held its form without additional support, validating the structural logic of the origami mechanism.
               </p>
             </div>
             <ImageSlider images={outcomeImages} colors={C} />
