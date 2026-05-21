@@ -1,4 +1,4 @@
-import React, { useContext, useRef, useState } from "react"
+import React, { useContext, useEffect, useRef, useState } from "react"
 import { Link } from "react-router-dom"
 import { motion, AnimatePresence } from "framer-motion"
 import { ThemeContext } from "../App"
@@ -64,13 +64,25 @@ function GalleryVideo({ mp4, mov }: { mp4?: string; mov?: string }) {
 // contain=true shows the full image without cropping (used in gallery)
 function PhotoBlock({ src, alt, contain = false }: { src: string; alt: string; contain?: boolean }) {
   const ref = useRef<HTMLDivElement>(null)
+  const [isFs, setIsFs] = useState(false)
+
+  useEffect(() => {
+    const onChange = () => setIsFs(document.fullscreenElement === ref.current)
+    document.addEventListener("fullscreenchange", onChange)
+    document.addEventListener("webkitfullscreenchange", onChange)
+    return () => {
+      document.removeEventListener("fullscreenchange", onChange)
+      document.removeEventListener("webkitfullscreenchange", onChange)
+    }
+  }, [])
+
   const enterFs = () => {
     const el = ref.current; if (!el) return
     if (el.requestFullscreen) el.requestFullscreen()
     else if ((el as any).webkitRequestFullscreen) (el as any).webkitRequestFullscreen()
   }
   return (
-    <div ref={ref} style={{ borderRadius: 12, overflow: "hidden", position: "relative", background: "#000", ...(contain ? {} : { aspectRatio: "4/3" }) }}>
+    <div ref={ref} style={{ borderRadius: isFs ? 0 : 12, overflow: "hidden", position: "relative", background: "#000", ...(!contain && !isFs ? { aspectRatio: "4/3" } : {}), ...(isFs ? { display: "flex", alignItems: "center", justifyContent: "center", width: "100%", height: "100%" } : {}) }}>
       <motion.img
         src={src}
         alt={alt}
@@ -78,7 +90,7 @@ function PhotoBlock({ src, alt, contain = false }: { src: string; alt: string; c
         whileInView={{ scale: 1 }}
         viewport={{ once: true }}
         transition={{ duration: 0.8, ease: "easeOut" }}
-        style={{ width: "100%", height: contain ? "auto" : "100%", objectFit: contain ? undefined : "cover", display: "block" }}
+        style={{ width: "100%", height: isFs || contain ? "auto" : "100%", objectFit: isFs ? "contain" : contain ? undefined : "cover", display: "block", maxHeight: isFs ? "100vh" : undefined }}
       />
       <FullscreenBtn onPress={enterFs} position="top-right" />
     </div>
@@ -131,7 +143,18 @@ function VideoHero() {
 // ── Image Slider ──────────────────────────────────────────────────────────────
 function ImageSlider({ images, colors }: { images: { src: string; alt: string }[]; colors: C }) {
   const [current, setCurrent] = useState(0)
+  const [isFs, setIsFs] = useState(false)
   const containerRef = useRef<HTMLDivElement>(null)
+
+  useEffect(() => {
+    const onChange = () => setIsFs(document.fullscreenElement === containerRef.current)
+    document.addEventListener("fullscreenchange", onChange)
+    document.addEventListener("webkitfullscreenchange", onChange)
+    return () => {
+      document.removeEventListener("fullscreenchange", onChange)
+      document.removeEventListener("webkitfullscreenchange", onChange)
+    }
+  }, [])
 
   const enterFs = () => {
     const el = containerRef.current; if (!el) return
@@ -140,7 +163,7 @@ function ImageSlider({ images, colors }: { images: { src: string; alt: string }[
   }
 
   return (
-    <div ref={containerRef} style={{ borderRadius: 12, overflow: "hidden", background: colors.border, position: "relative", aspectRatio: "4/3" }}>
+    <div ref={containerRef} style={{ borderRadius: isFs ? 0 : 12, overflow: "hidden", background: "#000", position: "relative", ...(isFs ? { display: "flex", alignItems: "center", justifyContent: "center", width: "100%", height: "100%" } : { aspectRatio: "4/3" }) }}>
       <AnimatePresence mode="wait">
         <motion.img
           key={current}
@@ -150,7 +173,7 @@ function ImageSlider({ images, colors }: { images: { src: string; alt: string }[
           animate={{ opacity: 1 }}
           exit={{ opacity: 0 }}
           transition={{ duration: 0.25 }}
-          style={{ position: "absolute", inset: 0, width: "100%", height: "100%", objectFit: "cover", display: "block" }}
+          style={isFs ? { maxWidth: "100%", maxHeight: "100vh", objectFit: "contain", display: "block" } : { position: "absolute", inset: 0, width: "100%", height: "100%", objectFit: "cover", display: "block" }}
         />
       </AnimatePresence>
 
