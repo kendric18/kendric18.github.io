@@ -167,10 +167,11 @@ export default function OrigaminahPage() {
     { src: "/Origaminah/2.png", alt: "Calculation and spatial analysis 3" },
   ]
 
-  const processImages = [
-    { src: "/Origaminah/photo_2026-05-21_13-23-59.jpg", alt: "Origaminah process 1" },
-    { src: "/Origaminah/photo_2026-05-21_13-24-30.jpg", alt: "Origaminah process 2" },
-    { src: "/Origaminah/photo_2026-05-21_13-24-42.jpg", alt: "Origaminah process 3" },
+  const step3Images = [
+    { src: "/Origaminah/photo_2026-05-21_13-24-42.jpg", alt: "Origami fold testing" },
+    { src: "/Origaminah/Untitled%201.png", alt: "Fold sketches" },
+    { src: "/Origaminah/Problem%20Staments%20(1).png", alt: "Problem statement reference" },
+    { src: "/Origaminah/Problem%20Staments%20(2).png", alt: "Ideation sketches" },
   ]
 
   const outcomeImages = [
@@ -308,20 +309,20 @@ export default function OrigaminahPage() {
         <FadeUp>
           <StepLabel step="03" title="Ideate" colors={C} />
           <div style={{ display: "grid", gridTemplateColumns: "1fr 1fr", gap: 48, alignItems: "start" }}>
-            <ImageSlider images={processImages} colors={C} />
+            <ImageSlider images={step3Images} colors={C} />
             <div>
               <p style={{ fontFamily: "Georgia, serif", fontSize: 14, color: C.muted, lineHeight: 1.85, margin: "0 0 20px" }}>
-                The ideation phase centred on origami as a conceptual model — its ability to transform a flat plane into complex three-dimensional forms using only folds. We explored how this logic could translate into architectural space: panels that fold, pivot, and reconfigure to create different spatial conditions on demand.
+                We experimented with a wide range of origami folds — testing which mechanisms were structurally sound, visually unobtrusive, and least distracting to diners. The core insight of origami guided us throughout: its ability to transform a flat plane into complex three-dimensional forms using only folds, with no fasteners or additional materials.
               </p>
               <p style={{ fontFamily: "Georgia, serif", fontSize: 14, color: C.muted, lineHeight: 1.85, margin: "0 0 20px" }}>
-                Dozens of sketch concepts were rapidly explored, tested as paper models, and evaluated against our design criteria before converging on the Origaminah system — a modular panel grid that allows users to define and redefine their spatial boundaries.
+                We also wanted to integrate an artistic sensibility into the project — Origaminah had to be more than functional. The folded geometry should feel intentional and beautiful, something that enhances the space rather than clutters it. To address the bird problem without harm, we settled on reflective surfaces: the light-scattering effect naturally deters birds while adding a dynamic, light-catching quality to the installation.
               </p>
               <div style={{ display: "flex", flexDirection: "column", gap: 8 }}>
                 {[
-                  "Rapid sketching and paper prototyping",
-                  "Origami-inspired folding geometries",
-                  "Modular panel system concept",
-                  "User flow and interaction mapping",
+                  "Tested multiple origami fold types for structure and subtlety",
+                  "Selected the least distractive mechanism for the dining context",
+                  "Integrated artistic intent — beauty as part of the brief",
+                  "Reflective surfaces deter birds naturally, without harm",
                 ].map((item, i) => (
                   <div key={i} style={{ display: "flex", gap: 10, alignItems: "center" }}>
                     <span style={{ width: 6, height: 6, borderRadius: "50%", background: C.primary, flexShrink: 0 }} />
