@@ -161,6 +161,12 @@ export default function OrigaminahPage() {
     { src: "/Origaminah/Problem%20Staments%20(1).png", alt: "Problem statement" },
   ]
 
+  const step2Images = [
+    { src: "/Origaminah/123.png", alt: "Calculation and spatial analysis 1" },
+    { src: "/Origaminah/1.png", alt: "Calculation and spatial analysis 2" },
+    { src: "/Origaminah/2.png", alt: "Calculation and spatial analysis 3" },
+  ]
+
   const processImages = [
     { src: "/Origaminah/photo_2026-05-21_13-23-59.jpg", alt: "Origaminah process 1" },
     { src: "/Origaminah/photo_2026-05-21_13-24-30.jpg", alt: "Origaminah process 2" },
@@ -267,9 +273,40 @@ export default function OrigaminahPage() {
 
         <Divider colors={C} />
 
-        {/* 02 Ideate */}
+        {/* 02 Calculation & Spatial Analysis */}
         <FadeUp>
-          <StepLabel step="02" title="Ideate" colors={C} />
+          <StepLabel step="02" title="Calculation & Spatial Analysis" colors={C} />
+          <div style={{ display: "grid", gridTemplateColumns: "1fr 1fr", gap: 48, alignItems: "start" }}>
+            <ImageSlider images={step2Images} colors={C} />
+            <div>
+              <p style={{ fontFamily: "Georgia, serif", fontSize: 14, color: C.muted, lineHeight: 1.85, margin: "0 0 20px" }}>
+                With the problem clearly defined, we moved into rigorous spatial analysis — measuring, calculating, and mapping the physical constraints of open canteen environments to ground our design decisions in real data.
+              </p>
+              <p style={{ fontFamily: "Georgia, serif", fontSize: 14, color: C.muted, lineHeight: 1.85, margin: "0 0 20px" }}>
+                We analysed ceiling heights, table arrangements, entry and exit points, and bird flight paths to understand how and where birds enter and move through these spaces. This informed the scale, placement, and geometry of our eventual solution.
+              </p>
+              <div style={{ display: "flex", flexDirection: "column", gap: 8 }}>
+                {[
+                  "On-site spatial measurements and mapping",
+                  "Bird entry point and flight path analysis",
+                  "Table density and diner flow modelling",
+                  "Structural and installation constraints",
+                ].map((item, i) => (
+                  <div key={i} style={{ display: "flex", gap: 10, alignItems: "center" }}>
+                    <span style={{ width: 6, height: 6, borderRadius: "50%", background: C.primary, flexShrink: 0 }} />
+                    <span style={{ fontFamily: "Arial, sans-serif", fontSize: 12, color: C.muted }}>{item}</span>
+                  </div>
+                ))}
+              </div>
+            </div>
+          </div>
+        </FadeUp>
+
+        <Divider colors={C} />
+
+        {/* 03 Ideate */}
+        <FadeUp>
+          <StepLabel step="03" title="Ideate" colors={C} />
           <div style={{ display: "grid", gridTemplateColumns: "1fr 1fr", gap: 48, alignItems: "start" }}>
             <ImageSlider images={processImages} colors={C} />
             <div>
@@ -298,9 +335,9 @@ export default function OrigaminahPage() {
 
         <Divider colors={C} />
 
-        {/* 03 Prototype & Test */}
+        {/* 04 Prototype & Test */}
         <FadeUp>
-          <StepLabel step="03" title="Prototype & Test" colors={C} />
+          <StepLabel step="04" title="Prototype & Test" colors={C} />
           <div style={{ display: "grid", gridTemplateColumns: "1fr 1fr", gap: 48, alignItems: "start" }}>
             <div>
               <p style={{ fontFamily: "Georgia, serif", fontSize: 14, color: C.muted, lineHeight: 1.85, margin: "0 0 20px" }}>
