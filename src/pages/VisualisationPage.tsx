@@ -115,10 +115,7 @@ function GalleryPhoto({ src, alt }: { src: string; alt: string }) {
           background: "rgba(0,0,0,0.5)", backdropFilter: "blur(4px)",
           border: "none", borderRadius: 6, width: 32, height: 32,
           cursor: "pointer", display: "flex", alignItems: "center", justifyContent: "center",
-          opacity: 0, transition: "opacity 0.2s",
         }}
-        onMouseEnter={e => (e.currentTarget.style.opacity = "1")}
-        onMouseLeave={e => (e.currentTarget.style.opacity = "0")}
       >
         <svg width="14" height="14" viewBox="0 0 16 16" fill="white">
           <path fillRule="evenodd" clipRule="evenodd" d="M1 1h5v1.5H2.5V5H1V1zm9 0h5v4h-1.5V2.5H10V1zM1 10h1.5v2.5H5V14H1v-4zm11.5 2.5V10H14v4h-4v-1.5h2.5z" />
@@ -139,6 +136,19 @@ export default function VisualisationPage() {
         <Link to="/" style={{ fontFamily: "Arial, sans-serif", fontSize: 11, letterSpacing: "1px", textTransform: "uppercase", color: C.muted, textDecoration: "none" }}>
           ← Back
         </Link>
+      </div>
+
+      {/* Hero video — autoplay, loop, muted */}
+      <div style={{ width: "100%", background: "#000", overflow: "hidden" }}>
+        <video
+          autoPlay
+          loop
+          muted
+          playsInline
+          style={{ width: "100%", maxHeight: "60vh", objectFit: "cover", display: "block" }}
+        >
+          <source src="/3D%20Visualisation/trim.mp4" type="video/mp4" />
+        </video>
       </div>
 
       {/* Header */}
