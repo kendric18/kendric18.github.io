@@ -213,10 +213,10 @@ export default function OrigaminahPage() {
             SUTD Studio project
           </p>
           <p style={{ fontFamily: "Georgia, serif", fontSize: 16, color: C.muted, lineHeight: 1.9, maxWidth: 720, margin: "0 0 20px" }}>
-            Origaminah is a design thinking project developed as part of SUTD's Design Thinking and Innovation studio. Its core purpose is to deter birds from open food courts and canteens — spaces where birds fly in freely, land on unattended food, and create serious hygiene risks for diners.
+            Origaminah is a design thinking project developed as part of SUTD's Design Thinking and Innovation studio. Its core purpose is to deter birds from open food courts and canteens, spaces where birds fly in freely, land on unattended food, and create serious hygiene risks for diners.
           </p>
           <p style={{ fontFamily: "Georgia, serif", fontSize: 16, color: C.muted, lineHeight: 1.9, maxWidth: 720, margin: "0 0 32px" }}>
-            Rather than using crude netting or loud deterrents, we wanted to solve the problem with intention — weaving art into the canteen environment through origami-inspired reflective panels that deter birds naturally while transforming the space into something worth looking at.
+            Rather than using crude netting or loud deterrents, we wanted to solve the problem with intention, weaving art into the canteen environment through origami-inspired reflective panels that deter birds naturally while transforming the space into something worth looking at.
           </p>
           <div style={{ maxWidth: 720, borderRadius: 12, overflow: "hidden", aspectRatio: "16/9" }}>
             <iframe
@@ -292,7 +292,7 @@ export default function OrigaminahPage() {
             <ImageSlider images={step2Images} colors={C} />
             <div>
               <p style={{ fontFamily: "Georgia, serif", fontSize: 14, color: C.muted, lineHeight: 1.85, margin: "0 0 20px" }}>
-                With the problem clearly defined, we moved into rigorous spatial analysis — measuring, calculating, and mapping the physical constraints of open canteen environments to ground our design decisions in real data.
+                With the problem clearly defined, we moved into rigorous spatial analysis, measuring, calculating, and mapping the physical constraints of open canteen environments to ground our design decisions in real data.
               </p>
               <p style={{ fontFamily: "Georgia, serif", fontSize: 14, color: C.muted, lineHeight: 1.85, margin: "0 0 20px" }}>
                 We analysed ceiling heights, table arrangements, entry and exit points, and bird flight paths to understand how and where birds enter and move through these spaces. This informed the scale, placement, and geometry of our eventual solution.
@@ -323,7 +323,7 @@ export default function OrigaminahPage() {
             <ImageSlider images={step3Images} colors={C} />
             <div>
               <p style={{ fontFamily: "Georgia, serif", fontSize: 14, color: C.muted, lineHeight: 1.85, margin: "0 0 20px" }}>
-                We experimented with a wide range of origami folds — testing which mechanisms were structurally sound, visually unobtrusive, and least distracting to diners. The core insight of origami guided us throughout: its ability to transform a flat plane into complex three-dimensional forms using only folds, with no fasteners or additional materials.
+                We experimented with a wide range of origami folds, testing which mechanisms were structurally sound, visually unobtrusive, and least distracting to diners. The core insight of origami guided us throughout: its ability to transform a flat plane into complex three-dimensional forms using only folds, with no fasteners or additional materials.
               </p>
               <p style={{ fontFamily: "Georgia, serif", fontSize: 14, color: C.muted, lineHeight: 1.85, margin: "0 0 20px" }}>
                 We also wanted to integrate an artistic sensibility into the project — Origaminah had to be more than functional. The folded geometry should feel intentional and beautiful, something that enhances the space rather than clutters it. To address the bird problem without harm, we settled on reflective surfaces: the light-scattering effect naturally deters birds while adding a dynamic, light-catching quality to the installation.

@@ -376,7 +376,7 @@ export default function LiftyPage() {
 
               {/* Stats */}
               <p style={{ fontFamily: "Georgia, serif", fontSize: 14, color: C.muted, lineHeight: 1.85, margin: 0 }}>
-                Bed-making is physically demanding — involving constant bending, lifting and tucking. Housekeepers perform <strong>250–600 bends</strong> and <strong>70–200 mattress lifts per day</strong>, clean 12–20 rooms, and walk 8–16 km per shift. Trunk flexion analysis shows bending past 90° is common, placing workers at very high risk of back injury. Up to <strong>70% of housekeepers</strong> develop musculoskeletal disorders. Lifting forces can reach 2,000–6,000 N per lift, accumulating to an estimated <strong>960,000 N/day</strong> on the lower back — equivalent to the weight of 20 adult elephants.
+                Bed-making is physically demanding, involving constant bending, lifting and tucking. Housekeepers perform <strong>250–600 bends</strong> and <strong>70–200 mattress lifts per day</strong>, clean 12–20 rooms, and walk 8–16 km per shift. Trunk flexion analysis shows bending past 90° is common, placing workers at very high risk of back injury. Up to <strong>70% of housekeepers</strong> develop musculoskeletal disorders. Lifting forces can reach 2,000–6,000 N per lift, accumulating to an estimated <strong>960,000 N/day</strong> on the lower back — equivalent to the weight of 20 adult elephants.
               </p>
             </div>
 

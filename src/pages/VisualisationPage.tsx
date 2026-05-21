@@ -163,7 +163,7 @@ export default function VisualisationPage() {
             The Wood Creation · Edgeline Planners
           </p>
           <p style={{ fontFamily: "Georgia, serif", fontSize: 16, color: C.muted, lineHeight: 1.9, maxWidth: 720, margin: 0 }}>
-            I love to design — and more than anything, I love bringing design to life. As a freelance part-time drafter at The Wood Creation and Edgeline Planners, my work centred on 3D visualisation for carpentry and interior design firms: creating renders that let customers truly see and feel their future homes before a single nail was hammered. Beyond the visuals, this work built a precise, practical understanding of space — working to the millimetre on spatial calculations, and developing deep knowledge of how interior design and carpentry systems actually go together. Every project sharpened my ability to translate a client's vision into something buildable, beautiful, and exactly right.
+            I love to design — and more than anything, I love bringing design to life. As a freelance part-time drafter at The Wood Creation and Edgeline Planners, my work centred on 3D visualisation for carpentry and interior design firms: creating renders that let customers truly see and feel their future homes before a single nail was hammered. Beyond the visuals, this work built a precise, practical understanding of space, working to the millimetre on spatial calculations, and developing deep knowledge of how interior design and carpentry systems actually go together. Every project sharpened my ability to translate a client's vision into something buildable, beautiful, and exactly right.
           </p>
         </FadeUp>
 
