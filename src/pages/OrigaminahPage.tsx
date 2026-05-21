@@ -131,6 +131,12 @@ function Divider({ colors }: { colors: C }) {
 export default function OrigaminahPage() {
   const { C } = useContext(ThemeContext)
 
+  const step1Images = [
+    { src: "/Origaminah/photo_2026-05-21_13-24-56.jpg", alt: "Birds in open canteen" },
+    { src: "/Origaminah/photo_2026-05-21_13-24-59.jpg", alt: "Bird hygiene problem" },
+    { src: "/Origaminah/Problem%20Staments%20(1).png", alt: "Problem statement" },
+  ]
+
   const processImages = [
     { src: "/Origaminah/photo_2026-05-21_13-23-59.jpg", alt: "Origaminah process 1" },
     { src: "/Origaminah/photo_2026-05-21_13-24-30.jpg", alt: "Origaminah process 2" },
@@ -153,13 +159,15 @@ export default function OrigaminahPage() {
         </Link>
       </div>
 
-      {/* Hero image */}
-      <div style={{ width: "100%", maxHeight: "60vh", overflow: "hidden", background: "#000", display: "flex", alignItems: "center", justifyContent: "center" }}>
-        <img
-          src="/Origaminah/Problem%20Staments.png"
-          alt="Origaminah"
+      {/* Hero video */}
+      <div style={{ width: "100%", background: "#000", position: "relative" }}>
+        <video
+          controls
+          playsInline
           style={{ width: "100%", maxHeight: "60vh", objectFit: "cover", display: "block" }}
-        />
+        >
+          <source src="/Origaminah/yuh.mp4" type="video/mp4" />
+        </video>
       </div>
 
       {/* Header */}
@@ -210,16 +218,17 @@ export default function OrigaminahPage() {
           <div style={{ display: "grid", gridTemplateColumns: "1fr 1fr", gap: 48, alignItems: "start" }}>
             <div>
               <p style={{ fontFamily: "Georgia, serif", fontSize: 14, color: C.muted, lineHeight: 1.85, margin: "0 0 20px" }}>
-                The process began with deep user research — observing how people navigate and occupy shared spaces. Through interviews and contextual observation, we identified a core tension: rigid environments that fail to flex around the dynamic, ever-changing nature of human activity.
+                Our research centred on open-air canteens and food courts in Singapore — spaces where diners regularly share their environment with birds. Through on-site observation, we found that birds frequently fly into these spaces and target unattended food, creating a serious hygiene concern.
               </p>
               <p style={{ fontFamily: "Georgia, serif", fontSize: 14, color: C.muted, lineHeight: 1.85, margin: "0 0 20px" }}>
-                We synthesised our findings into a clear problem statement: shared spaces need to be modular, reconfigurable, and human-centred — capable of adapting in real time to different group sizes, activities, and needs.
+                Diners who leave their seats — to queue for food, use the restroom, or pay — return to find their meals contaminated or partially eaten. Beyond the obvious health risk, this erodes trust in these communal dining spaces and causes real distress, particularly for the elderly and families with young children.
               </p>
               <div style={{ display: "flex", flexDirection: "column", gap: 10 }}>
                 {[
-                  "Contextual interviews and site observations",
-                  "Affinity mapping and insight clustering",
-                  "Point-of-view and problem framing",
+                  "Birds fly freely into open canteens and food courts",
+                  "Unattended food is regularly contaminated or eaten by birds",
+                  "Poses hygiene and food safety risks to diners",
+                  "Problem is especially acute for vulnerable groups",
                 ].map((point, i) => (
                   <div key={i} style={{ display: "flex", gap: 12, alignItems: "flex-start" }}>
                     <span style={{ color: C.primary, fontFamily: "Arial, sans-serif", fontSize: 13, marginTop: 1, flexShrink: 0 }}>→</span>
@@ -228,7 +237,7 @@ export default function OrigaminahPage() {
                 ))}
               </div>
             </div>
-            <PhotoBlock src="/Origaminah/Problem%20Staments.png" alt="Problem statements" contain />
+            <ImageSlider images={step1Images} colors={C} />
           </div>
         </FadeUp>
 
