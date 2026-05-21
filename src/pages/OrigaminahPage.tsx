@@ -212,9 +212,21 @@ export default function OrigaminahPage() {
           <p style={{ fontFamily: "Georgia, serif", fontSize: 15, color: C.muted, margin: "0 0 32px" }}>
             SUTD Studio project
           </p>
-          <p style={{ fontFamily: "Georgia, serif", fontSize: 16, color: C.muted, lineHeight: 1.9, maxWidth: 720, margin: 0 }}>
-            Origaminah is a design thinking project developed as part of SUTD's Design Thinking and Innovation studio. Drawing inspiration from the geometry and fold logic of origami, the project explores how modular spatial systems can adapt to human needs — redefining how people inhabit and move through shared spaces.
+          <p style={{ fontFamily: "Georgia, serif", fontSize: 16, color: C.muted, lineHeight: 1.9, maxWidth: 720, margin: "0 0 20px" }}>
+            Origaminah is a design thinking project developed as part of SUTD's Design Thinking and Innovation studio. Its core purpose is to deter birds from open food courts and canteens — spaces where birds fly in freely, land on unattended food, and create serious hygiene risks for diners.
           </p>
+          <p style={{ fontFamily: "Georgia, serif", fontSize: 16, color: C.muted, lineHeight: 1.9, maxWidth: 720, margin: "0 0 32px" }}>
+            Rather than using crude netting or loud deterrents, we wanted to solve the problem with intention — weaving art into the canteen environment through origami-inspired reflective panels that deter birds naturally while transforming the space into something worth looking at.
+          </p>
+          <div style={{ maxWidth: 720, borderRadius: 12, overflow: "hidden", aspectRatio: "16/9" }}>
+            <iframe
+              src="https://www.youtube.com/embed/uPyGweD7dUU"
+              title="Origaminah project video"
+              allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+              allowFullScreen
+              style={{ width: "100%", height: "100%", border: "none", display: "block" }}
+            />
+          </div>
         </FadeUp>
 
         {/* Metadata */}
