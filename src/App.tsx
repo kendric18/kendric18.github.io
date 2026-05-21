@@ -48,7 +48,7 @@ const PROJECTS = [
   { id: "lifty", category: "Product Design · Hardware", title: "Lifty", subtitle: "SUTD × LionsBot International", image: "/lifty/lifty-card.jpg", link: "/projects/lifty" },
   { id: "project-2", category: "Design Thinking and Innovation", title: "Origaminah", subtitle: "SUTD Studio project", image: "/Origaminah/Problem%20Staments.png", link: "/projects/origaminah" },
   { id: "project-3", category: "Interior Design · 3D Drafting", title: "3D Visualisation", subtitle: "The Wood Creation · Edgeline Planners", image: "/3D%20Visualisation/WhatsApp%20Image%202024-04-18%20at%2012.51.04%20PM-%E5%AE%A2%E5%8E%85-20260521-000918.jpg", link: "/projects/3d-visualisation" },
-  { id: "project-4", category: "Research", title: "Project 4", subtitle: "SUTD studio project", image: "https://images.unsplash.com/photo-1517048676732-d65bc937f952?w=600&q=80", link: "#" },
+  { id: "project-4", category: "Vibe Coded · Personal Projects", title: "Mini Apps", subtitle: "Personal vibe-coded projects", image: "/personal-projects/Screenshot%202026-05-21%20153219.png", link: "#" },
 ]
 
 const SKILLS = ["Product Design", "UX Research", "Figma / Framer", "Python / C++", "CAD / Fusion 360", "AutoCAD", "Electronics / Arduino", "AI / ML"]
