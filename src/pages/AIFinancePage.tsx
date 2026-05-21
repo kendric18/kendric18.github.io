@@ -64,10 +64,10 @@ export default function AIFinancePage() {
             Vibe Coded · Personal Projects
           </div>
           <h1 style={{ fontFamily: "Georgia, serif", fontSize: "clamp(36px, 6vw, 64px)", fontWeight: 700, color: C.text, margin: "0 0 12px", lineHeight: 1.1 }}>
-            Mini AI Finance Equity Analysis
+            AI Finance Equity Analysis
           </h1>
           <p style={{ fontFamily: "Georgia, serif", fontSize: 15, color: C.muted, margin: "0 0 64px" }}>
-            KenFinance — AI-powered equity analysis dashboard
+            KenFinance — AI-powered equity analysis
           </p>
         </FadeUp>
 
@@ -88,7 +88,7 @@ export default function AIFinancePage() {
               KenFinance
             </h2>
             <p style={{ fontFamily: "Georgia, serif", fontSize: 14, color: C.primary, margin: "0 0 28px" }}>
-              AI-Powered Equity Analysis Dashboard
+              AI-Powered Equity Analysis
             </p>
 
             {/* Two-col layout */}

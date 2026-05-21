@@ -149,10 +149,10 @@ export default function MiniAppsPage() {
             Vibe Coded · Personal Projects
           </div>
           <h1 style={{ fontFamily: "Georgia, serif", fontSize: "clamp(36px, 6vw, 64px)", fontWeight: 700, color: C.text, margin: "0 0 12px", lineHeight: 1.1 }}>
-            Mini Apps
+            Financial Planner Assistant
           </h1>
           <p style={{ fontFamily: "Georgia, serif", fontSize: 15, color: C.muted, margin: "0 0 64px" }}>
-            A collection of personal side projects — tools built fast, built to actually work.
+            An all-in-one software for Financial Advisors.
           </p>
         </FadeUp>
 

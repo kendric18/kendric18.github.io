@@ -50,8 +50,8 @@ const PROJECTS = [
   { id: "lifty", category: "Product Design · Hardware", title: "Lifty", subtitle: "SUTD × LionsBot International", image: "/lifty/lifty-card.jpg", link: "/projects/lifty" },
   { id: "project-2", category: "Design Thinking and Innovation", title: "Origaminah", subtitle: "SUTD Studio project", image: "/Origaminah/Problem%20Staments.png", link: "/projects/origaminah" },
   { id: "project-3", category: "Interior Design · 3D Drafting", title: "3D Visualisation", subtitle: "The Wood Creation · Edgeline Planners", image: "/3D%20Visualisation/WhatsApp%20Image%202024-04-18%20at%2012.51.04%20PM-%E5%AE%A2%E5%8E%85-20260521-000918.jpg", link: "/projects/3d-visualisation" },
-  { id: "project-4", category: "Vibe Coded · Personal Projects", title: "Mini Apps", subtitle: "Personal vibe-coded projects", image: "/personal-projects/Screenshot%202026-05-21%20153219.png", link: "/projects/mini-apps" },
-  { id: "project-5", category: "Vibe Coded · Personal Projects", title: "Mini AI Finance Equity Analysis", subtitle: "KenFinance — AI-powered equity analysis dashboard", image: "/AI-stock/Screenshot%202026-05-21%20175928.png", link: "/projects/AI-finance-equity-analysis" },
+  { id: "project-4", category: "Vibe Coded · Personal Projects", title: "Financial Planner Assistant", subtitle: "An all-in-one software for FAs", image: "/personal-projects/Screenshot%202026-05-21%20153219.png", link: "/projects/mini-apps" },
+  { id: "project-5", category: "Vibe Coded · Personal Projects", title: "AI Finance Equity Analysis", subtitle: "KenFinance — AI-powered equity analysis", image: "/AI-stock/Screenshot%202026-05-21%20175928.png", link: "/projects/AI-finance-equity-analysis" },
 ]
 
 const SKILLS = ["Product Design", "UX Research", "Figma / Framer", "Python / C++", "CAD / Fusion 360", "AutoCAD", "Electronics / Arduino", "AI / ML"]
