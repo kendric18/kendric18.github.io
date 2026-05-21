@@ -7,7 +7,6 @@ const BASE = "/3D%20Visualisation/"
 const img = (filename: string) => BASE + encodeURIComponent(filename)
 
 const ALL_IMAGES = [
-  "WhatsApp Image 2024-04-18 at 12.51.04 PM-客厅-20260521-000918.jpg",
   "WhatsApp Image 2024-04-18 at 12.51.04 PM-客厅-20260521-000923.jpg",
   "WhatsApp Image 2024-04-18 at 12.51.04 PM-客厅-20260521-000934.jpg",
   "WhatsApp Image 2024-04-18 at 12.51.04 PM-客厅-20260521-000938.jpg",
