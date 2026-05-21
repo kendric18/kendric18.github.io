@@ -84,7 +84,7 @@ function ProjectBlock({ project }: { project: Project }) {
             <div>
               <div style={{ fontFamily: "Arial, sans-serif", fontSize: 9, letterSpacing: "2px", textTransform: "uppercase", color: C.primary, marginBottom: 12 }}>Tech Stack</div>
               <div style={{ display: "flex", flexWrap: "wrap", gap: 8 }}>
-                {project.stack.map(s => <Tag key={s}>{s}</Tag>)}
+                <Tag>Vibe-coded with Claude.ai &amp; ChatGPT</Tag>
               </div>
             </div>
 
