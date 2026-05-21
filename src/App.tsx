@@ -375,7 +375,7 @@ function Contact() {
         <p style={{ fontFamily: "Georgia, serif", fontSize: 14, color: C.placeholder, margin: "0 0 32px" }}>Open to design + tech internships in Singapore.</p>
         <div style={{ display: "flex", gap: 12, justifyContent: "center", flexWrap: "wrap" }}>
           <CTAButton href="mailto:kendrictjy@gmail.com" filled>kendrictjy@gmail.com</CTAButton>
-          <CTAButton href="https://linkedin.com/in/kendrictoh" filled={false}>LinkedIn ↗</CTAButton>
+          <CTAButton href="https://www.linkedin.com/in/kendric-toh-338757212/" filled={false}>LinkedIn ↗</CTAButton>
         </div>
       </FadeUp>
     </section>
