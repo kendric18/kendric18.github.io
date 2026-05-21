@@ -5,6 +5,7 @@ import { Routes, Route, Link } from "react-router-dom"
 import { ShaderAnimation } from "./ShaderAnimation"
 import { Scroller } from "@/components/ui/scroller-1"
 import LiftyPage from "./pages/LiftyPage"
+import OrigaminahPage from "./pages/OrigaminahPage"
 
 // ─── COLOUR TOKENS ────────────────────────────────────────────────────────────
 const LIGHT = {
@@ -44,7 +45,7 @@ const PHOTO_URL = "/kendric.jpg"
 
 const PROJECTS = [
   { id: "lifty", category: "Product Design · Hardware", title: "Lifty", subtitle: "SUTD × LionsBot International", image: "/lifty/lifty-card.jpg", link: "/projects/lifty" },
-  { id: "project-2", category: "Design Thinking and Innovation", title: "Origaminah", subtitle: "SUTD Studio project", image: "/Origaminah/Problem%20Staments.png", link: "#" },
+  { id: "project-2", category: "Design Thinking and Innovation", title: "Origaminah", subtitle: "SUTD Studio project", image: "/Origaminah/Problem%20Staments.png", link: "/projects/origaminah" },
   { id: "project-3", category: "Design Systems", title: "Project 3", subtitle: "SUTD studio project", image: "https://images.unsplash.com/photo-1561070791-2526d30994b5?w=600&q=80", link: "#" },
   { id: "project-4", category: "Research", title: "Project 4", subtitle: "SUTD studio project", image: "https://images.unsplash.com/photo-1517048676732-d65bc937f952?w=600&q=80", link: "#" },
 ]
@@ -405,6 +406,7 @@ export default function App() {
       <Routes>
         <Route path="/" element={<Portfolio />} />
         <Route path="/projects/lifty" element={<LiftyPage />} />
+        <Route path="/projects/origaminah" element={<OrigaminahPage />} />
       </Routes>
     </ThemeContext.Provider>
   )
