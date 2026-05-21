@@ -261,7 +261,7 @@ function About() {
         <FadeUp>
           <div>
             <Eyebrow>About</Eyebrow>
-            <h2 style={{ fontFamily: "Georgia, serif", fontSize: 22, fontWeight: 700, color: C.text, margin: "0 0 16px", lineHeight: 1.4 }}>From carpentry to code, always building.</h2>
+            <h2 style={{ fontFamily: "Georgia, serif", fontSize: 22, fontWeight: 700, color: C.text, margin: "0 0 16px", lineHeight: 1.4 }}>From drafting tables to dashboards, always designing.</h2>
             <p style={{ fontFamily: "Georgia, serif", fontSize: 14, color: C.muted, lineHeight: 1.8, margin: "0 0 12px" }}>
               Started with a screwdriver and a saw. Then Interior Design at NAFA, EEE at SP — and now Design & AI at SUTD. Every pivot taught me to think across disciplines.
             </p>
