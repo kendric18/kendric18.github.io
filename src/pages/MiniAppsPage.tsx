@@ -37,7 +37,7 @@ function Tag({ children }: { children: string }) {
 interface Project {
   title: string
   subtitle: string
-  screenshot: string
+  video: string
   p1: string
   p2: string
   stack: string[]
@@ -49,11 +49,12 @@ function ProjectBlock({ project }: { project: Project }) {
   return (
     <FadeUp>
       <div style={{ marginBottom: 100 }}>
-        {/* Screenshot */}
+        {/* Video */}
         <div style={{ borderRadius: 14, overflow: "hidden", border: `1px solid ${C.border}`, marginBottom: 40, boxShadow: "0 8px 40px rgba(0,0,0,0.12)" }}>
-          <img
-            src={project.screenshot}
-            alt={project.title}
+          <video
+            controls
+            playsInline
+            src={project.video}
             style={{ width: "100%", display: "block" }}
           />
         </div>
@@ -112,9 +113,9 @@ const PROJECTS: Project[] = [
   {
     title: "SG Insurance Planner",
     subtitle: "Full-stack financial planning tool for Singapore insurance advisors",
-    screenshot: "/personal-projects/Screenshot%202026-05-21%20153219.png",
+    video: "/personal-projects/Video%20Project%20(1).mp4",
     p1: "SG Insurance Planner is a full-stack financial planning web application built for Singapore-based insurance advisors. The app enables advisors to manage a book of clients, track policies across six coverage categories — Whole Life, Critical Illness, Hospitalisation, Disability Income, Accidental, and Wealth Accumulation — and visualise each client's protection portfolio through an interactive coverage timeline chart. Key features include a dynamic coverage gap analysis that benchmarks a client's current cover against recommended amounts, a multi-series chart that aggregates policies by type with per-policy toggles, rider tracking for Critical Illness, Early CI, and Accidental Death benefits, surrender value schedule interpolation, and investment projection modelling with best and worst case rates.",
-    p2: "The application is designed for independent financial advisors who need a clean, centralised tool to prepare for client reviews and generate professional client-facing reports. At the click of a button, the app produces a branded PDF Policy Summary covering all active policies, a coverage gap table, and per-policy breakdowns of rider amounts and surrender values — eliminating the need for manual spreadsheets. Built with React and Vite on the frontend, Node.js and Express on the backend, and SQLite for lightweight data persistence, the app runs entirely locally to keep sensitive client data off third-party servers. PDF generation is handled server-side via Puppeteer, producing print-ready A4 documents styled to a professional advisory standard.",
+    p2: "The application is designed for independent financial advisors who need a clean, centralised tool to prepare for client reviews and generate professional client-facing reports. At the click of a button, the app produces a branded PDF Policy Summary covering all active policies, a coverage gap table, and per-policy breakdowns of rider amounts and surrender values — eliminating the need for manual spreadsheets.",
     stack: ["React", "Vite", "Node.js", "Express", "SQLite", "Puppeteer"],
     features: [
       "Coverage gap analysis across 6 categories",
