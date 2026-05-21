@@ -221,9 +221,9 @@ export default function OrigaminahPage() {
         <FadeUp delay={0.1}>
           <div style={{ display: "grid", gridTemplateColumns: "repeat(auto-fit, minmax(160px, 1fr))", gap: 32, paddingTop: 56, paddingBottom: 60, borderBottom: `1px solid ${C.border}`, marginBottom: 80 }}>
             {[
-              { label: "Role", value: "Designer & Researcher" },
+              { label: "Role", value: "Designer · Researcher · Electrical & Electronic Configuration" },
               { label: "Course", value: "Design Thinking & Innovation" },
-              { label: "Tools", value: "Figma · Physical Prototyping" },
+              { label: "Tools", value: "User Research & Testing · Physical Prototyping" },
               { label: "Context", value: "SUTD Studio" },
             ].map(({ label, value }) => (
               <div key={label}>
